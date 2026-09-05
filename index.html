@@ -20,7 +20,7 @@
   </div>
 </nav>
 
-<div id="worldViewport">
+<div id="gameViewport">
 <div id="world">
   <section id="home" class="land-zone">
     <div class="hero-copy">
@@ -141,12 +141,12 @@
   <div class="panel page-help">
     <h2>COMO JOGAR?</h2>
     <div class="help-grid">
-      <div><strong>⌨</strong><p>Use <b>setas</b> ou <b>WASD</b> para andar.</p></div>
+      <div><strong>📱</strong><p>No celular: <b>toque, segure e arraste</b> o dedo na tela para andar em qualquer direção!</p></div>
+      <div><strong>⌨</strong><p>No computador: Use <b>setas</b> ou <b>WASD</b> para andar.</p></div>
       <div><strong>🏠</strong><p>Aproxime-se das portas para explorar cada seção.</p></div>
-      <div><strong>↵</strong><p>Pressione <b>ENTER</b> quando a porta estiver ativa.</p></div>
-      <div><strong>🖱</strong><p>Também pode clicar no mapa para mover o personagem.</p></div>
-      <div><strong>ESC</strong><p>Fecha janelas e volta ao jogo.</p></div>
-      <div><strong>⚓</strong><p>No fim do mapa, embarque para chegar ao contato.</p></div>
+      <div><strong>↵</strong><p>Pressione o botão <b>ENTRAR</b> ou <b>ENTER</b> para abrir.</p></div>
+      <div><strong>ESC</strong><p>Toque fora ou use o botão <b>×</b> para fechar as janelas.</p></div>
+      <div><strong>⚓</strong><p>No fim do mapa, embarque no píer para ver os contactos.</p></div>
     </div>
   </div>
 </template>
@@ -218,19 +218,12 @@
   </div>
 </template>
 
-<div id="touchControls" class="touch-controls">
-  <div class="dpad">
-    <button class="dpad-btn up" data-key="w" aria-label="Mover para Cima">▲</button>
-    <button class="dpad-btn left" data-key="a" aria-label="Mover para Esquerda">◀</button>
-    <button class="dpad-btn right" data-key="d" aria-label="Mover para Direita">▶</button>
-    <button class="dpad-btn down" data-key="s" aria-label="Mover para Baixo">▼</button>
-    <div class="dpad-center"></div>
-  </div>
-  <button id="touchActionBtn" class="touch-action-btn" aria-label="Ação">
-    <span class="action-icon">↵</span>
-    <span class="action-label" id="actionBtnLabel">AÇÃO</span>
-  </button>
+<div id="virtualJoystick" class="virtual-joystick hidden">
+  <div class="joystick-ring"></div>
+  <div class="joystick-knob"></div>
 </div>
+
+<button id="actionPrompt" class="action-prompt hidden"></button>
 
 <script src="game.js"></script>
 </body>

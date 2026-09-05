@@ -4,8 +4,8 @@ a{color:inherit;text-decoration:none}
 #topNav{position:fixed;z-index:100;top:0;left:50%;transform:translateX(-50%);width:min(1080px,94vw);height:58px;background:rgba(22,13,18,.96);border:3px solid rgba(255,255,255,.75);border-top:0;border-radius:0 0 32px 32px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;box-shadow:0 4px 0 rgba(0,0,0,.4)}
 .logo,.navlinks a,#helpBtn{font:15px PixelBold,monospace;letter-spacing:1px;color:#f5efd7}
 .logo{color:#83c9db}.navlinks{display:flex;align-items:center;height:100%;gap:4px}.navlinks a,#helpBtn{height:100%;display:flex;align-items:center;padding:0 16px;border:0;background:transparent;cursor:pointer}.navlinks a:hover,#helpBtn:hover{background:#153a48;color:#fff}
-#worldViewport{position:relative;width:100vw;max-width:100%;overflow-x:hidden;overflow-y:visible}
-#world{position:relative;width:960px;left:50%;transform:translateX(-50%) scale(var(--world-scale,1));transform-origin:top center}
+#gameViewport{position:fixed;inset:0;width:100vw;height:100vh;overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none;background:#0d1820}
+#world{position:absolute;top:0;left:0;width:960px;height:3400px;will-change:transform;transform-origin:0 0}
 .land-zone{height:1250px;position:relative;background:url("assets/grass.png") repeat}
 .path-zone{height:720px;position:relative;background:url("assets/grass.png") repeat}
 .shore-zone{height:430px;position:relative;background:url("assets/grass.png") repeat;border-bottom:8px solid #74503c}
@@ -71,20 +71,14 @@ a{color:inherit;text-decoration:none}
 .hamburger-btn{display:none;background:transparent;border:2px solid #83c9db;border-radius:6px;color:#fff;font:20px PixelBold;padding:4px 10px;cursor:pointer;line-height:1}
 .hamburger-btn:hover{background:#153a48}
 
-.touch-controls{position:fixed;bottom:16px;left:16px;right:16px;z-index:150;display:none;justify-content:space-between;align-items:flex-end;pointer-events:none}
-.touch-controls>*{pointer-events:auto}
-.dpad{position:relative;width:130px;height:130px}
-.dpad-btn{position:absolute;width:42px;height:42px;background:#142a36;border:3px solid #9d8a5b;color:#fff0c6;font:14px PixelBold;display:grid;place-items:center;border-radius:8px;box-shadow:3px 3px 0 rgba(0,0,0,.4);user-select:none;-webkit-user-select:none;touch-action:manipulation;cursor:pointer}
-.dpad-btn.up{top:0;left:44px}
-.dpad-btn.down{bottom:0;left:44px}
-.dpad-btn.left{top:44px;left:0}
-.dpad-btn.right{top:44px;right:0}
-.dpad-btn:active,.dpad-btn.active{background:#2b5a74;border-color:#e8dcac;transform:scale(.92)}
-.dpad-center{position:absolute;top:44px;left:44px;width:42px;height:42px;background:#0d1e28;border:2px solid #5a4b32;border-radius:6px}
-.touch-action-btn{width:76px;height:76px;border-radius:50%;background:#257a8e;border:4px solid #8de1ea;box-shadow:0 5px 0 #0d222d;color:#fff0bf;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;user-select:none;-webkit-user-select:none;touch-action:manipulation;transition:transform .1s,background .1s}
-.touch-action-btn:active,.touch-action-btn.active{background:#3598af;transform:translateY(2px)}
-.action-icon{font:22px PixelBold;line-height:1}
-.action-label{font:10px PixelBold;letter-spacing:.5px;margin-top:2px}
+.virtual-joystick{position:fixed;z-index:120;pointer-events:none;transform:translate(-50%,-50%);transition:opacity .15s ease-out}
+.virtual-joystick.hidden{opacity:0;pointer-events:none}
+.joystick-ring{width:96px;height:96px;border-radius:50%;background:rgba(18,35,46,.5);border:3px solid rgba(141,225,234,.75);box-shadow:0 0 20px rgba(0,0,0,.6),inset 0 0 12px rgba(141,225,234,.3);backdrop-filter:blur(3px)}
+.joystick-knob{position:absolute;top:50%;left:50%;width:44px;height:44px;margin-top:-22px;margin-left:-22px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#8de1ea,#206778);border:2px solid #fff;box-shadow:0 4px 10px rgba(0,0,0,.6);pointer-events:none}
+.action-prompt{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:110;background:#173849;color:#fff0c6;border:3px solid #8de1ea;border-radius:30px;padding:12px 26px;font:13px PixelBold,monospace;letter-spacing:1px;box-shadow:0 6px 20px rgba(0,0,0,.6);cursor:pointer;display:flex;align-items:center;gap:8px;animation:promptPulse 1.8s ease-in-out infinite}
+@keyframes promptPulse{0%,100%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.04)}}
+.action-prompt:active{transform:translateX(-50%) scale(.95);background:#257a8e}
+.action-prompt.hidden{display:none}
 
 .help-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.help-grid>div{display:grid;grid-template-columns:90px 1fr;align-items:center;background:rgba(3,30,40,.65);border:3px solid rgba(255,255,255,.18);padding:15px}.help-grid strong{font:32px PixelBold;color:#fff0b4;text-align:center}.help-grid p{margin:0;font-size:16px}
 
@@ -191,16 +185,12 @@ a{color:inherit;text-decoration:none}
   color:#fff2e8;
 }
 
-@media(max-width:900px),(pointer:coarse){
-  .touch-controls{display:flex}
-}
-
 @media(max-width:900px){
   #topNav{width:94vw;height:54px;padding:0 16px;border-radius:0 0 20px 20px}
   .hamburger-btn{display:flex;align-items:center;justify-content:center;width:40px;height:40px;background:#153a48;border:2px solid #83c9db;border-radius:8px;color:#fff;font-size:20px;cursor:pointer}
-  .navlinks{display:none;position:fixed;top:60px;left:50%;transform:translateX(-50%);width:90vw;background:rgba(18,10,14,.98);border:3px solid rgba(255,255,255,.8);border-radius:16px;padding:14px;flex-direction:column;gap:8px;box-shadow:0 10px 30px rgba(0,0,0,.8);z-index:200}
+  .navlinks{display:none;position:fixed;top:60px;left:50%;transform:translateX(-50%);width:90vw;max-height:80vh;overflow-y:auto;background:rgba(18,10,14,.98);border:3px solid rgba(255,255,255,.8);border-radius:16px;padding:14px;flex-direction:column;gap:8px;box-shadow:0 10px 30px rgba(0,0,0,.8);z-index:200}
   .navlinks.mobile-open{display:flex}
-  .navlinks a,#helpBtn{width:100%;height:46px;justify-content:center;align-items:center;padding:0 14px;font-size:13px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)}
+  .navlinks a,#helpBtn{width:100%;height:46px;min-height:46px;justify-content:center;align-items:center;padding:0 14px;font-size:13px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)}
 
   #interactionHint{top:66px;bottom:auto;font-size:11px;padding:6px 12px;max-width:90vw;border-radius:6px}
 

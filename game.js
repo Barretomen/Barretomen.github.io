@@ -9,16 +9,28 @@ const boat = document.getElementById("boat");
 const boatPlayer = document.getElementById("boatPlayer");
 const contactContent = document.getElementById("contactContent");
 const bridge = document.querySelector(".bridge");
+const actionPrompt = document.getElementById("actionPrompt");
+const joystick = document.getElementById("virtualJoystick");
+const joystickKnob = joystick ? joystick.querySelector(".joystick-knob") : null;
+const hamburgerBtn = document.getElementById("hamburgerBtn");
+const navLinks = document.getElementById("navLinks");
 
 const state = {
   x: 480,
   y: 650,
-  speed: 250,
+  speed: 260,
   moving: false,
   dir: "down",
   near: null,
   modal: false,
   boatStatus: "docked", // docked | sailing | away | returning
+};
+
+const camera = {
+  x: 0,
+  y: 0,
+  targetX: 0,
+  targetY: 0,
 };
 
 const keys = new Set();
@@ -116,19 +128,6 @@ const PROJECTS_DATA = [
   }
 ];
 
-function updateWorldScale() {
-  const targetWidth = 960;
-  const currentWidth = Math.min(window.innerWidth, targetWidth);
-  const scale = currentWidth / targetWidth;
-  document.documentElement.style.setProperty("--world-scale", scale);
-
-  const world = document.getElementById("world");
-  const viewport = document.getElementById("worldViewport");
-  if (world && viewport) {
-    viewport.style.height = (world.offsetHeight * scale) + "px";
-  }
-}
-
 function seaTop() {
   const sea = document.querySelector(".sea-zone");
   return sea ? sea.offsetTop : 2400;
@@ -150,12 +149,11 @@ function setSprite(dir, moving) {
 
 function houseDoorPoint(house) {
   const r = house.getBoundingClientRect();
-  return { x: r.left + r.width / 2 + window.scrollX, y: r.bottom + window.scrollY - 6 };
-}
-
-function playerCenterPoint() {
-  const r = player.getBoundingClientRect();
-  return { x: r.left + r.width / 2 + window.scrollX, y: r.bottom + window.scrollY - 10 };
+  const worldRect = WORLD.getBoundingClientRect();
+  return {
+    x: (r.left - worldRect.left) + r.width / 2,
+    y: (r.bottom - worldRect.top) - 6
+  };
 }
 
 function flashBlocked(text) {
@@ -168,39 +166,51 @@ function flashBlocked(text) {
 function detectNear() {
   if (state.boatStatus !== "docked") {
     state.near = null;
-    updateActionBtnLabel();
+    updateActionPrompt();
     return;
   }
 
-  const pCenter = playerCenterPoint();
   let best = null, bd = Infinity;
-
   document.querySelectorAll(".house").forEach(h => {
-    const doorP = houseDoorPoint(h);
-    const d = Math.hypot(pCenter.x - doorP.x, pCenter.y - doorP.y);
-    h.classList.toggle("near", d < 100);
-    if (d < 100 && d < bd) {
+    const p = houseDoorPoint(h);
+    const d = Math.hypot(state.x - p.x, state.y - p.y);
+    h.classList.toggle("near", d < 120);
+    if (d < 120 && d < bd) {
       best = { type: "house", el: h, section: h.dataset.section, label: h.querySelector(".sign b").textContent };
       bd = d;
     }
   });
 
-  const bridgeEl = document.querySelector(".bridge");
-  if (bridgeEl) {
-    const bRect = bridgeEl.getBoundingClientRect();
-    const bCenter = { x: bRect.left + bRect.width / 2 + window.scrollX, y: bRect.top + bRect.height / 2 + window.scrollY };
-    const boatDist = Math.hypot(pCenter.x - bCenter.x, pCenter.y - bCenter.y);
-    if (boatDist < 120 && boatDist < bd) {
-      best = { type: "boat", label: "BARCO" };
-    }
+  const p = boardingPoint();
+  const boatDist = Math.hypot(state.x - p.x, state.y - p.y);
+  if (boatDist < 140 && boatDist < bd) {
+    best = { type: "boat", label: "BARCO" };
   }
 
   state.near = best;
-  if (best?.type === "house") hint.textContent = `ENTER, TOQUE OU CLIQUE → ${best.label}`;
-  else if (best?.type === "boat") hint.textContent = "CLIQUE, TOQUE OU ENTER → EMBARCAR NO BARCO";
-  else hint.textContent = "Explore o mapa com WASD / Setas / D-Pad ou toque para mover.";
+  if (best?.type === "house") hint.textContent = `TOQUE NO BOTÃO OU ENTER → ${best.label}`;
+  else if (best?.type === "boat") hint.textContent = "TOQUE NO BOTÃO OU ENTER → EMBARCAR NO BARCO";
+  else hint.textContent = "Toque e arraste na tela ou use WASD / Setas para andar.";
 
-  updateActionBtnLabel();
+  updateActionPrompt();
+}
+
+function updateActionPrompt() {
+  if (!actionPrompt) return;
+  if (state.modal || state.boatStatus !== "docked") {
+    actionPrompt.classList.add("hidden");
+    return;
+  }
+
+  if (state.near?.type === "house") {
+    actionPrompt.innerHTML = `<span>🏠</span> ENTRAR: ${state.near.label}`;
+    actionPrompt.classList.remove("hidden");
+  } else if (state.near?.type === "boat") {
+    actionPrompt.innerHTML = `<span>⚓</span> EMBARCAR NO BARCO`;
+    actionPrompt.classList.remove("hidden");
+  } else {
+    actionPrompt.classList.add("hidden");
+  }
 }
 
 function isBridgePosition(x, y) {
@@ -231,7 +241,7 @@ function teleport(x, y, instant = false, callback = null) {
     player.style.top = state.y + "px";
     setSprite(state.dir, false);
     detectNear();
-    cameraFollow();
+    updateCamera(false);
     if (callback) callback();
     return true;
   }
@@ -249,7 +259,7 @@ function teleport(x, y, instant = false, callback = null) {
     player.style.top = state.y + "px";
     setSprite(state.dir, false);
     detectNear();
-    cameraFollow();
+    updateCamera(true);
 
     player.style.opacity = "1";
 
@@ -276,14 +286,48 @@ function movementBounds(nx, ny) {
 
 function dirFrom(dx, dy) {
   const ax = Math.abs(dx), ay = Math.abs(dy);
-  if (ax < .18 && dy < 0) return "up";
-  if (ax < .18 && dy > 0) return "down";
-  if (ay < .18 && dx > 0) return "right";
-  if (ay < .18 && dx < 0) return "left";
+  if (ax < .28 && dy < 0) return "up";
+  if (ax < .28 && dy > 0) return "down";
+  if (ay < .28 && dx > 0) return "right";
+  if (ay < .28 && dx < 0) return "left";
   if (dx > 0 && dy < 0) return "up_right";
   if (dx < 0 && dy < 0) return "up_left";
   if (dx > 0 && dy > 0) return "down_right";
   return "down_left";
+}
+
+function updateCamera(smooth = true) {
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  const worldW = 960;
+  const worldH = 3400;
+
+  if (state.boatStatus === "away" || state.boatStatus === "sailing") {
+    camera.targetX = vw >= worldW ? -(vw - worldW) / 2 : clamp(480 - vw / 2, 0, worldW - vw);
+    camera.targetY = seaTop() + 140 - vh * 0.35;
+  } else {
+    if (vw >= worldW) {
+      camera.targetX = -(vw - worldW) / 2;
+    } else {
+      camera.targetX = clamp(state.x - vw / 2, 0, worldW - vw);
+    }
+
+    if (vh >= worldH) {
+      camera.targetY = -(vh - worldH) / 2;
+    } else {
+      camera.targetY = clamp(state.y - vh / 2, 0, worldH - vh);
+    }
+  }
+
+  if (!smooth) {
+    camera.x = camera.targetX;
+    camera.y = camera.targetY;
+  } else {
+    camera.x += (camera.targetX - camera.x) * 0.16;
+    camera.y += (camera.targetY - camera.y) * 0.16;
+  }
+
+  WORLD.style.transform = `translate3d(${-camera.x.toFixed(2)}px, ${-camera.y.toFixed(2)}px, 0)`;
 }
 
 function renderProjectsPage(page) {
@@ -351,8 +395,11 @@ function openPanel(name) {
   overlay.classList.remove("hidden");
   state.modal = true;
   keys.clear();
+  touchMoveVector = { x: 0, y: 0 };
+  touchActive = false;
+  if (joystick) joystick.classList.add("hidden");
   setSprite(state.dir, false);
-  updateActionBtnLabel();
+  updateActionPrompt();
 
   if (name === "projects") {
     currentProjectPage = 1;
@@ -367,7 +414,7 @@ function closePanel() {
   overlay.classList.add("hidden");
   state.modal = false;
   modalCooldown = performance.now() + 250;
-  updateActionBtnLabel();
+  updateActionPrompt();
 }
 
 function interact() {
@@ -388,6 +435,9 @@ function sail() {
   state.boatStatus = "sailing";
   state.near = null;
   keys.clear();
+  touchMoveVector = { x: 0, y: 0 };
+  touchActive = false;
+  if (joystick) joystick.classList.add("hidden");
 
   const p = boardingPoint();
   state.x = p.x; state.y = p.y;
@@ -402,7 +452,7 @@ function sail() {
   boat.classList.add("sail");
 
   hint.textContent = "O BARCO ESTÁ A PARTIR...";
-  window.scrollTo({ top: seaTop() + 10, behavior: "smooth" });
+  updateActionPrompt();
 
   contactTimer = setTimeout(() => {
     contactContent.classList.add("show");
@@ -429,7 +479,6 @@ function returnBoat() {
   boat.classList.remove("sail");
 
   hint.textContent = "O BARCO ESTÁ A VOLTAR AO PÍER...";
-  window.scrollTo({ top: Math.max(0, seaTop() - innerHeight * .55), behavior: "smooth" });
 
   boatTimer = setTimeout(() => {
     state.boatStatus = "docked";
@@ -439,21 +488,143 @@ function returnBoat() {
     player.style.opacity = "1";
     setSprite("up", false);
     detectNear();
-    cameraFollow();
-    hint.textContent = "BARCO ATRACADO — CLIQUE NO BARCO OU PÍER PARA EMBARCAR.";
+    updateCamera(true);
+    hint.textContent = "BARCO ATRACADO — APROXIME-SE DO PÍER PARA EMBARCAR.";
   }, 4600);
 }
 
-function cameraFollow() {
-  if (state.boatStatus !== "docked") return;
-  const scale = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--world-scale")) || 1;
-  const playerScreenY = state.y * scale;
-  const desired = Math.max(0, playerScreenY - window.innerHeight * 0.45);
-  window.scrollTo({ top: desired, behavior: "auto" });
+/* ===== Touch Drag & Virtual Joystick Navigation ===== */
+let touchActive = false;
+let touchId = null;
+let touchOrigin = { x: 0, y: 0 };
+let touchMoveVector = { x: 0, y: 0 };
+let touchStartTime = 0;
+
+window.addEventListener("touchstart", e => {
+  if (state.modal) return;
+  if (e.target.closest("#topNav, #overlay, #actionPrompt, .social, #closeModal, #returnPierBtn")) return;
+
+  const touch = e.touches[0];
+  touchId = touch.identifier;
+  touchActive = true;
+  touchStartTime = performance.now();
+  touchOrigin = { x: touch.clientX, y: touch.clientY };
+  touchMoveVector = { x: 0, y: 0 };
+
+  if (joystick) {
+    joystick.style.left = touchOrigin.x + "px";
+    joystick.style.top = touchOrigin.y + "px";
+    joystick.classList.remove("hidden");
+    if (joystickKnob) joystickKnob.style.transform = "translate(0, 0)";
+  }
+}, { passive: true });
+
+window.addEventListener("touchmove", e => {
+  if (!touchActive) return;
+  for (let i = 0; i < e.touches.length; i++) {
+    if (e.touches[i].identifier === touchId) {
+      const t = e.touches[i];
+      const dx = t.clientX - touchOrigin.x;
+      const dy = t.clientY - touchOrigin.y;
+      const dist = Math.hypot(dx, dy);
+
+      if (dist > 8) {
+        const maxR = 40;
+        const clampedDist = Math.min(dist, maxR);
+        const nx = dx / dist;
+        const ny = dy / dist;
+
+        touchMoveVector = {
+          x: nx * (clampedDist / maxR),
+          y: ny * (clampedDist / maxR),
+        };
+
+        if (joystickKnob) {
+          joystickKnob.style.transform = `translate(${nx * clampedDist}px, ${ny * clampedDist}px)`;
+        }
+      } else {
+        touchMoveVector = { x: 0, y: 0 };
+        if (joystickKnob) joystickKnob.style.transform = "translate(0, 0)";
+      }
+      break;
+    }
+  }
+}, { passive: false });
+
+function handleTouchEnd(e) {
+  if (!touchActive) return;
+  const duration = performance.now() - touchStartTime;
+
+  let tapX = touchOrigin.x;
+  let tapY = touchOrigin.y;
+  if (e.changedTouches && e.changedTouches[0]) {
+    tapX = e.changedTouches[0].clientX;
+    tapY = e.changedTouches[0].clientY;
+  }
+
+  const dist = Math.hypot(tapX - touchOrigin.x, tapY - touchOrigin.y);
+
+  touchActive = false;
+  touchId = null;
+  touchMoveVector = { x: 0, y: 0 };
+
+  if (joystick) {
+    joystick.classList.add("hidden");
+    if (joystickKnob) joystickKnob.style.transform = "translate(0, 0)";
+  }
+
+  // Quick tap: handle tap interaction
+  if (duration < 300 && dist < 15) {
+    handleScreenTap(tapX, tapY);
+  }
+}
+
+window.addEventListener("touchend", handleTouchEnd, { passive: true });
+window.addEventListener("touchcancel", handleTouchEnd, { passive: true });
+
+function handleScreenTap(screenX, screenY) {
+  if (state.modal) return;
+  const worldX = screenX + camera.x;
+  const worldY = screenY + camera.y;
+
+  // Check if tapped a house
+  let interacted = false;
+  document.querySelectorAll(".house").forEach(h => {
+    const r = h.getBoundingClientRect();
+    if (screenX >= r.left && screenX <= r.right && screenY >= r.top && screenY <= r.bottom) {
+      interacted = true;
+      openPanel(h.dataset.section);
+    }
+  });
+
+  if (interacted) return;
+
+  // Check if tapped boat
+  const bRect = boat.getBoundingClientRect();
+  if (screenX >= bRect.left && screenX <= bRect.right && screenY >= bRect.top && screenY <= bRect.bottom) {
+    if (state.boatStatus === "docked") sail();
+    else if (state.boatStatus === "away" || state.boatStatus === "sailing") returnBoat();
+    return;
+  }
+
+  // Otherwise teleport / move to clicked point
+  teleport(worldX, worldY, false);
+}
+
+document.addEventListener("click", e => {
+  if (e.target.closest("#topNav,#overlay,.social,#boat,.house,.bridge,.return-pier,#actionPrompt")) return;
+  handleScreenTap(e.clientX, e.clientY);
+});
+
+if (actionPrompt) {
+  actionPrompt.addEventListener("click", e => {
+    e.stopPropagation();
+    interact();
+  });
 }
 
 function update(dt) {
-  if (state.modal || state.boatStatus !== "docked") return;
+  if (state.modal) return;
 
   let dx = 0, dy = 0;
   if (keys.has("ArrowLeft") || keys.has("a")) dx--;
@@ -461,23 +632,31 @@ function update(dt) {
   if (keys.has("ArrowUp") || keys.has("w")) dy--;
   if (keys.has("ArrowDown") || keys.has("s")) dy++;
 
-  if (dx && dy) { dx *= .707; dy *= .707; }
+  if (touchActive && (touchMoveVector.x !== 0 || touchMoveVector.y !== 0)) {
+    dx = touchMoveVector.x;
+    dy = touchMoveVector.y;
+  } else if (dx && dy) {
+    dx *= .707;
+    dy *= .707;
+  }
+
   state.moving = !!(dx || dy);
 
-  if (state.moving) {
+  if (state.moving && state.boatStatus === "docked") {
     state.dir = dirFrom(dx, dy);
     const [nx, ny] = movementBounds(
       state.x + dx * state.speed * dt,
       state.y + dy * state.speed * dt
     );
-    state.x = nx; state.y = ny;
+    state.x = nx;
+    state.y = ny;
   }
 
   player.style.left = state.x + "px";
   player.style.top = state.y + "px";
   setSprite(state.dir, state.moving);
   detectNear();
-  cameraFollow();
+  updateCamera(true);
 }
 
 function loop(t) {
@@ -508,20 +687,6 @@ window.addEventListener("keydown", e => {
 });
 window.addEventListener("keyup", e => keys.delete(e.key.length === 1 ? e.key.toLowerCase() : e.key));
 
-document.addEventListener("click", e => {
-  if (e.target.closest("#topNav,#overlay,.social,#boat,.house,.bridge,.return-pier,#touchControls")) return;
-
-  const worldEl = document.getElementById("world");
-  if (!worldEl) return;
-  const worldRect = worldEl.getBoundingClientRect();
-  const scale = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--world-scale")) || 1;
-
-  const targetWorldX = (e.clientX - worldRect.left) / scale;
-  const targetWorldY = (e.clientY - worldRect.top) / scale;
-
-  teleport(targetWorldX, targetWorldY, false);
-});
-
 closeModal.addEventListener("click", closePanel);
 overlay.addEventListener("click", e => { if (e.target === overlay) closePanel(); });
 document.getElementById("helpBtn").addEventListener("click", () => openPanel("help"));
@@ -540,7 +705,7 @@ document.querySelectorAll("[data-nav]").forEach(a => a.addEventListener("click",
     if (state.boatStatus === "docked") {
       sail();
     } else {
-      window.scrollTo({ top: seaTop() + 10, behavior: "smooth" });
+      updateCamera(true);
     }
     return;
   }
@@ -550,12 +715,7 @@ document.querySelectorAll("[data-nav]").forEach(a => a.addEventListener("click",
   const house = document.querySelector(`[data-section="${key}"]`);
   if (house) {
     const doorP = houseDoorPoint(house);
-    const worldEl = document.getElementById("world");
-    const worldRect = worldEl.getBoundingClientRect();
-    const scale = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--world-scale")) || 1;
-    const targetX = (doorP.x - worldRect.left) / scale;
-    const targetY = (doorP.y - worldRect.top) / scale + 48;
-    teleport(targetX, targetY, false, () => openPanel(key));
+    teleport(doorP.x, doorP.y + 48, false, () => openPanel(key));
   }
 }));
 
@@ -563,13 +723,8 @@ document.querySelectorAll(".house").forEach(h => h.addEventListener("click", e =
   e.stopPropagation();
   if (state.boatStatus !== "docked") return;
   const doorP = houseDoorPoint(h);
-  const worldEl = document.getElementById("world");
-  const worldRect = worldEl.getBoundingClientRect();
-  const scale = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--world-scale")) || 1;
-  const targetX = (doorP.x - worldRect.left) / scale;
-  const targetY = (doorP.y - worldRect.top) / scale + 48;
   const section = h.dataset.section;
-  teleport(targetX, targetY, false, () => openPanel(section));
+  teleport(doorP.x, doorP.y + 48, false, () => openPanel(section));
 }));
 
 bridge.addEventListener("click", e => {
@@ -595,18 +750,13 @@ document.addEventListener("click", e => {
 });
 
 window.addEventListener("resize", () => {
-  updateWorldScale();
-  state.x = clamp(state.x, 36, 960 - 36);
-  if (state.boatStatus === "docked") {
-    player.style.left = state.x + "px";
-  }
+  updateCamera(false);
 });
-window.addEventListener("load", updateWorldScale);
+window.addEventListener("orientationchange", () => {
+  setTimeout(() => updateCamera(false), 120);
+});
 
-/* ===== Mobile Nav & Touch Controls Logic ===== */
-const hamburgerBtn = document.getElementById("hamburgerBtn");
-const navLinks = document.getElementById("navLinks");
-
+/* ===== Mobile Hamburger Navigation ===== */
 if (hamburgerBtn && navLinks) {
   hamburgerBtn.addEventListener("click", e => {
     e.stopPropagation();
@@ -624,46 +774,8 @@ if (hamburgerBtn && navLinks) {
   });
 }
 
-document.querySelectorAll(".dpad-btn").forEach(btn => {
-  const key = btn.dataset.key;
-
-  const press = e => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (state.boatStatus === "docked" && !state.modal) {
-      keys.add(key);
-      btn.classList.add("active");
-    }
-  };
-
-  const release = e => {
-    e.preventDefault();
-    e.stopPropagation();
-    keys.delete(key);
-    btn.classList.remove("active");
-  };
-
-  btn.addEventListener("touchstart", press, { passive: false });
-  btn.addEventListener("touchend", release, { passive: false });
-  btn.addEventListener("touchcancel", release, { passive: false });
-  btn.addEventListener("mousedown", press);
-  btn.addEventListener("mouseup", release);
-  btn.addEventListener("mouseleave", release);
-});
-
-const touchActionBtn = document.getElementById("touchActionBtn");
-if (touchActionBtn) {
-  const handleAction = e => {
-    e.preventDefault();
-    e.stopPropagation();
-    interact();
-  };
-
-  touchActionBtn.addEventListener("touchstart", handleAction, { passive: false });
-  touchActionBtn.addEventListener("click", handleAction);
-}
-
 setSprite("down", false);
 player.style.left = state.x + "px";
 player.style.top = state.y + "px";
+updateCamera(false);
 setTimeout(() => openPanel("help"), 550);
