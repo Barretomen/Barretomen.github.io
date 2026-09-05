@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>João Barreto — RPG Portfolio</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav id="topNav">
+  <a class="logo" href="#home" data-nav="home">BARRETO.DEV</a>
+  <div class="navlinks">
+    <a href="#home" data-nav="home">INÍCIO</a>
+    <a href="#aboutHouse" data-nav="about">SOBRE MIM</a>
+    <a href="#skillsHouse" data-nav="skills">SERVIÇOS & SKILLS</a>
+    <a href="#projectsHouse" data-nav="projects">PROJETOS</a>
+    <a href="#boat" data-nav="contact">CONTATO</a>
+    <button id="helpBtn" title="Como jogar">?</button>
+  </div>
+</nav>
+
+<div id="world">
+  <section id="home" class="land-zone">
+    <div class="hero-copy">
+      <h1>JOÃO<br>BARRETO</h1>
+      <p>DESENVOLVIMENTO · AUTOMAÇÃO · SOFTWARE</p>
+      <span>Use as setas / WASD para explorar.</span>
+    </div>
+
+    <div class="road vertical road-main"></div>
+    <div class="road horizontal cross-road"></div>
+
+    <div id="aboutHouse" class="house about-house" data-section="about">
+      <img class="building" src="assets/house_about.png" alt="">
+      <img class="door" src="assets/door_about.png" alt="">
+      <div class="sign"><b>SOBRE MIM</b><small>ENTRAR ↵</small></div>
+    </div>
+
+    <div id="skillsHouse" class="house skills-house" data-section="skills">
+      <img class="building" src="assets/house_skills.png" alt="">
+      <img class="door" src="assets/door_skills.png" alt="">
+      <div class="sign"><b>SERVIÇOS & SKILLS</b><small>ENTRAR ↵</small></div>
+    </div>
+
+    <div id="projectsHouse" class="house projects-house" data-section="projects">
+      <img class="building" src="assets/house_projects.png" alt="">
+      <img class="door" src="assets/door_projects.png" alt="">
+      <div class="sign"><b>PROJETOS</b><small>ENTRAR ↵</small></div>
+    </div>
+
+    <div class="signpost sign-1">IDEIAS<br>↓<br>CÓDIGO</div>
+    <div class="signpost sign-2">TESTAR<br>↓<br>MELHORAR</div>
+
+    <div class="tree t1"></div><div class="tree t2"></div><div class="tree t3"></div>
+    <div class="tree t4"></div><div class="tree t5"></div><div class="tree t6"></div>
+    <div class="flowers f1"></div><div class="flowers f2"></div><div class="flowers f3"></div>
+    <div class="flowers f4"></div><div class="flowers f5"></div>
+
+    <div class="fence fence-left"></div>
+    <div class="fence fence-right"></div>
+  </section>
+
+  <section class="path-zone">
+    <div class="road vertical road-main"></div>
+    <div class="journey-card">
+      <b>PEQUENAS IDEIAS</b>
+      <span>↓</span>
+      <b>FERRAMENTAS ÚTEIS</b>
+      <span>↓</span>
+      <b>PROJETOS REAIS</b>
+    </div>
+    <div class="tree p1"></div><div class="tree p2"></div><div class="tree p3"></div><div class="tree p4"></div>
+  </section>
+
+  <section class="shore-zone">
+    <div class="road vertical road-main"></div>
+    <h2 class="shore-title">FIM DA ESTRADA.<br><span>OU COMEÇO DE OUTRA.</span></h2>
+    <div class="bridge"></div>
+  </section>
+
+  <section id="sea" class="sea-zone">
+    <div id="boat">
+      <img src="assets/boat.png" alt="Barco">
+      <div id="boatPlayer"></div>
+    </div>
+    <div id="contactContent">
+      <h2>MANTENHA-SE EM CONTACTO</h2>
+      <p>Quer conversar sobre código, automação, um projeto ou uma ideia?</p>
+      <div class="socials">
+        <a class="social gmail" href="mailto:imjoaobarreto@gmail.com" target="_blank" title="Gmail">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.5 18V6.5C1.5 5.4 2.4 4.5 3.5 4.5H4.25L12 11L19.75 4.5H20.5C21.6 4.5 22.5 5.4 22.5 6.5V18C22.5 19.1 21.6 20 20.5 20H18V10L12 15L6 10V20H3.5C2.4 20 1.5 19.1 1.5 18Z" fill="#EA4335"/>
+            <path d="M18 10V20H20.5C21.6 20 22.5 19.1 22.5 18V6.5L18 10Z" fill="#4285F4"/>
+            <path d="M6 10L1.5 6.5V18C1.5 19.1 2.4 20 3.5 20H6V10Z" fill="#34A853"/>
+            <path d="M4.25 4.5H3.5C2.4 4.5 1.5 5.4 1.5 6.5V7.5L6 11V10L4.25 4.5Z" fill="#FBBC04"/>
+            <path d="M19.75 4.5H20.5C21.6 4.5 22.5 5.4 22.5 6.5V7.5L18 11V10L19.75 4.5Z" fill="#EA4335"/>
+          </svg>
+        </a>
+        <a class="social github" href="https://github.com/Barretomen" target="_blank" title="GitHub">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+          </svg>
+        </a>
+        <a class="social linkedin" href="https://www.linkedin.com/in/barretomendes/" target="_blank" title="LinkedIn">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+          </svg>
+        </a>
+        <a class="social instagram" href="https://www.instagram.com/jaobm_/" target="_blank" title="Instagram">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+      </div>
+      <button id="returnPierBtn" class="return-pier">← VOLTAR AO PÍER</button>
+      <div class="message-board">
+        <b>OBRIGADO PELA VISITA!</b>
+        <span>Se chegou até aqui, já explorou boa parte do que gosto de construir.</span>
+      </div>
+    </div>
+  </section>
+
+  <div id="player" class="player" aria-label="Personagem">
+    <img id="playerSprite" src="assets/player_down_left_idle.png" alt="">
+  </div>
+</div>
+
+<div id="interactionHint">Explore o mapa com as setas ou WASD.</div>
+
+<div id="overlay" class="hidden">
+  <div id="modal">
+    <button id="closeModal">×</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<template id="tpl-help">
+  <div class="panel page-help">
+    <h2>COMO JOGAR?</h2>
+    <div class="help-grid">
+      <div><strong>⌨</strong><p>Use <b>setas</b> ou <b>WASD</b> para andar.</p></div>
+      <div><strong>🏠</strong><p>Aproxime-se das portas para explorar cada seção.</p></div>
+      <div><strong>↵</strong><p>Pressione <b>ENTER</b> quando a porta estiver ativa.</p></div>
+      <div><strong>🖱</strong><p>Também pode clicar no mapa para mover o personagem.</p></div>
+      <div><strong>ESC</strong><p>Fecha janelas e volta ao jogo.</p></div>
+      <div><strong>⚓</strong><p>No fim do mapa, embarque para chegar ao contato.</p></div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-about">
+  <div class="panel about-panel">
+    <h2>SOBRE MIM</h2>
+    <div class="about-reference-layout">
+      <div class="about-text">
+        <h3>OLÁ!</h3>
+        <p>Sou o <b>João Barreto</b>, desenvolvedor em Viseu, Portugal. Gosto de transformar necessidades reais do dia a dia em ferramentas úteis.</p>
+        <p>Boa parte do que está neste portfólio começou com um problema que eu queria resolver: simplificar uma rotina, automatizar uma tarefa, integrar ferramentas ou entender melhor como alguma coisa funcionava.</p>
+        <p>Por isso há um pouco de tudo por aqui. Vou de <b>HTML e CSS</b> a <b>JavaScript, Python, C#, Electron, automações, extensões e análise técnica</b>.</p>
+        <p>Este portfólio não existe apenas para apresentar serviços. Ele também é um registo das coisas que gosto de construir e dos desafios que decido agarrar.</p>
+        <div class="about-motto"><b>O meu jeito de trabalhar:</b><br>entender o problema → experimentar → construir → melhorar.</div>
+      </div>
+      <div class="about-photo-wrap">
+        <img src="assets/joao-paris.jpg" alt="João Barreto em Paris">
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-skills">
+  <div class="panel skills-panel">
+    <h2>SERVIÇOS & HABILIDADES</h2>
+    <div class="skills-head"><h3>O QUE EU FAÇO</h3><h3>COMO?</h3></div>
+    <div class="skills-columns">
+      <div class="what-i-do">
+        <div class="skill-block"><div class="big-icon">⌨</div><div><h4>Aplicações & Ferramentas</h4><p>Web, desktop e utilitários criados para resolver problemas reais e tornar processos mais simples.</p></div></div>
+        <div class="skill-block"><div class="big-icon">⚙</div><div><h4>Automação</h4><p>Procuro tarefas repetitivas e transformo-as em fluxos automáticos, extensões ou pequenos sistemas.</p></div></div>
+        <div class="skill-block"><div class="big-icon">▣</div><div><h4>Sites & Interfaces</h4><p>Sites de apresentação, PWAs, painéis e interfaces pensadas para serem fáceis de usar.</p></div></div>
+        <div class="skill-block"><div class="big-icon">⌕</div><div><h4>Análise Técnica</h4><p>Debugging, investigação de comportamento, integração entre sistemas e engenharia reversa quando o projeto exige.</p></div></div>
+      </div>
+      <div class="how-list">
+        <ul>
+          <li>HTML, CSS, JavaScript & TypeScript</li>
+          <li>React, interfaces responsivas & PWA</li>
+          <li>Python, Flask, Pillow & NumPy</li>
+          <li>C# / .NET 8 / Windows Forms</li>
+          <li>Electron & aplicações desktop</li>
+          <li>Google Apps Script</li>
+          <li>Firebase & integrações</li>
+          <li>Chrome Extensions / Manifest V3</li>
+          <li>Lua & ferramentas de geração de scripts</li>
+          <li>Git, GitHub, debugging & pesquisa</li>
+        </ul>
+        <div class="soft-skills">
+          <span>✓ Curiosidade</span><span>✓ Pesquisa</span><span>✓ Prototipagem</span>
+          <span>✓ Automação</span><span>✓ Aprendizagem rápida</span><span>✓ Pensar fora da caixa</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-projects">
+  <div class="panel projects-panel">
+    <h2>PROJETOS</h2>
+    <p class="panel-intro">Explore os meus projetos por páginas. Clique em "VER SITE LIVE ↗" para abrir o projeto diretamente!</p>
+    <div id="projectsGrid" class="project-grid">
+      <!-- Dinamicamente renderizado via JS -->
+    </div>
+    <div class="pagination-bar">
+      <button id="prevPageBtn" class="page-btn">« ANTERIOR</button>
+      <div id="pageNumbers" class="page-numbers"></div>
+      <button id="nextPageBtn" class="page-btn">PRÓXIMO »</button>
+    </div>
+  </div>
+</template>
+
+<script src="game.js"></script>
+</body>
+</html>
