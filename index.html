@@ -9,7 +9,8 @@
 <body>
 <nav id="topNav">
   <a class="logo" href="#home" data-nav="home">BARRETO.DEV</a>
-  <div class="navlinks">
+  <button id="hamburgerBtn" class="hamburger-btn" aria-label="Abrir menu">☰</button>
+  <div class="navlinks" id="navLinks">
     <a href="#home" data-nav="home">INÍCIO</a>
     <a href="#aboutHouse" data-nav="about">SOBRE MIM</a>
     <a href="#skillsHouse" data-nav="skills">SERVIÇOS & SKILLS</a>
@@ -214,6 +215,20 @@
     </div>
   </div>
 </template>
+
+<div id="touchControls" class="touch-controls">
+  <div class="dpad">
+    <button class="dpad-btn up" data-key="w" aria-label="Mover para Cima">▲</button>
+    <button class="dpad-btn left" data-key="a" aria-label="Mover para Esquerda">◀</button>
+    <button class="dpad-btn right" data-key="d" aria-label="Mover para Direita">▶</button>
+    <button class="dpad-btn down" data-key="s" aria-label="Mover para Baixo">▼</button>
+    <div class="dpad-center"></div>
+  </div>
+  <button id="touchActionBtn" class="touch-action-btn" aria-label="Ação">
+    <span class="action-icon">↵</span>
+    <span class="action-label" id="actionBtnLabel">AÇÃO</span>
+  </button>
+</div>
 
 <script src="game.js"></script>
 </body>

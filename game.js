@@ -149,6 +149,7 @@ function flashBlocked(text) {
 function detectNear() {
   if (state.boatStatus !== "docked") {
     state.near = null;
+    updateActionBtnLabel();
     return;
   }
 
@@ -170,9 +171,11 @@ function detectNear() {
   }
 
   state.near = best;
-  if (best?.type === "house") hint.textContent = `ENTER OU CLIQUE → ${best.label}`;
-  else if (best?.type === "boat") hint.textContent = "CLIQUE OU ENTER → EMBARCAR NO BARCO";
-  else hint.textContent = "Explore o mapa com WASD / Setas ou clique para mover.";
+  if (best?.type === "house") hint.textContent = `ENTER, TOQUE OU CLIQUE → ${best.label}`;
+  else if (best?.type === "boat") hint.textContent = "CLIQUE, TOQUE OU ENTER → EMBARCAR NO BARCO";
+  else hint.textContent = "Explore o mapa com WASD / Setas / D-Pad ou toque para mover.";
+
+  updateActionBtnLabel();
 }
 
 function isBridgePosition(x, y) {
@@ -326,6 +329,7 @@ function openPanel(name) {
   state.modal = true;
   keys.clear();
   setSprite(state.dir, false);
+  updateActionBtnLabel();
 
   if (name === "projects") {
     currentProjectPage = 1;
@@ -340,6 +344,7 @@ function closePanel() {
   overlay.classList.add("hidden");
   state.modal = false;
   modalCooldown = performance.now() + 250;
+  updateActionBtnLabel();
 }
 
 function interact() {
@@ -479,7 +484,7 @@ window.addEventListener("keydown", e => {
 window.addEventListener("keyup", e => keys.delete(e.key.length === 1 ? e.key.toLowerCase() : e.key));
 
 document.addEventListener("click", e => {
-  if (e.target.closest("#topNav,#overlay,.social,#boat,.house,.bridge,.return-pier")) return;
+  if (e.target.closest("#topNav,#overlay,.social,#boat,.house,.bridge,.return-pier,#touchControls")) return;
   const x = e.clientX;
   const y = e.clientY + scrollY;
 
@@ -554,6 +559,66 @@ window.addEventListener("resize", () => {
     player.style.left = state.x + "px";
   }
 });
+
+/* ===== Mobile Nav & Touch Controls Logic ===== */
+const hamburgerBtn = document.getElementById("hamburgerBtn");
+const navLinks = document.getElementById("navLinks");
+
+if (hamburgerBtn && navLinks) {
+  hamburgerBtn.addEventListener("click", e => {
+    e.stopPropagation();
+    navLinks.classList.toggle("mobile-open");
+  });
+
+  document.addEventListener("click", e => {
+    if (!e.target.closest("#topNav")) {
+      navLinks.classList.remove("mobile-open");
+    }
+  });
+
+  navLinks.querySelectorAll("a, button").forEach(el => {
+    el.addEventListener("click", () => navLinks.classList.remove("mobile-open"));
+  });
+}
+
+document.querySelectorAll(".dpad-btn").forEach(btn => {
+  const key = btn.dataset.key;
+
+  const press = e => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (state.boatStatus === "docked" && !state.modal) {
+      keys.add(key);
+      btn.classList.add("active");
+    }
+  };
+
+  const release = e => {
+    e.preventDefault();
+    e.stopPropagation();
+    keys.delete(key);
+    btn.classList.remove("active");
+  };
+
+  btn.addEventListener("touchstart", press, { passive: false });
+  btn.addEventListener("touchend", release, { passive: false });
+  btn.addEventListener("touchcancel", release, { passive: false });
+  btn.addEventListener("mousedown", press);
+  btn.addEventListener("mouseup", release);
+  btn.addEventListener("mouseleave", release);
+});
+
+const touchActionBtn = document.getElementById("touchActionBtn");
+if (touchActionBtn) {
+  const handleAction = e => {
+    e.preventDefault();
+    e.stopPropagation();
+    interact();
+  };
+
+  touchActionBtn.addEventListener("touchstart", handleAction, { passive: false });
+  touchActionBtn.addEventListener("click", handleAction);
+}
 
 setSprite("down", false);
 player.style.left = state.x + "px";
