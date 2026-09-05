@@ -11,7 +11,7 @@ const contactContent = document.getElementById("contactContent");
 const bridge = document.querySelector(".bridge");
 
 const state = {
-  x: innerWidth * .5,
+  x: 480,
   y: 650,
   speed: 250,
   moving: false,
@@ -116,11 +116,25 @@ const PROJECTS_DATA = [
   }
 ];
 
+function updateWorldScale() {
+  const targetWidth = 960;
+  const currentWidth = Math.min(window.innerWidth, targetWidth);
+  const scale = currentWidth / targetWidth;
+  document.documentElement.style.setProperty("--world-scale", scale);
+
+  const world = document.getElementById("world");
+  const viewport = document.getElementById("worldViewport");
+  if (world && viewport) {
+    viewport.style.height = (world.offsetHeight * scale) + "px";
+  }
+}
+
 function seaTop() {
-  return document.querySelector(".sea-zone").offsetTop;
+  const sea = document.querySelector(".sea-zone");
+  return sea ? sea.offsetTop : 2400;
 }
 function boardingPoint() {
-  return { x: innerWidth / 2, y: seaTop() + 72 };
+  return { x: 480, y: seaTop() + 72 };
 }
 function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
 
@@ -136,7 +150,12 @@ function setSprite(dir, moving) {
 
 function houseDoorPoint(house) {
   const r = house.getBoundingClientRect();
-  return { x: r.left + r.width / 2 + scrollX, y: r.bottom + scrollY - 6 };
+  return { x: r.left + r.width / 2 + window.scrollX, y: r.bottom + window.scrollY - 6 };
+}
+
+function playerCenterPoint() {
+  const r = player.getBoundingClientRect();
+  return { x: r.left + r.width / 2 + window.scrollX, y: r.bottom + window.scrollY - 10 };
 }
 
 function flashBlocked(text) {
@@ -153,21 +172,27 @@ function detectNear() {
     return;
   }
 
+  const pCenter = playerCenterPoint();
   let best = null, bd = Infinity;
+
   document.querySelectorAll(".house").forEach(h => {
-    const p = houseDoorPoint(h);
-    const d = Math.hypot(state.x - p.x, state.y - p.y);
-    h.classList.toggle("near", d < 110);
-    if (d < 110 && d < bd) {
+    const doorP = houseDoorPoint(h);
+    const d = Math.hypot(pCenter.x - doorP.x, pCenter.y - doorP.y);
+    h.classList.toggle("near", d < 100);
+    if (d < 100 && d < bd) {
       best = { type: "house", el: h, section: h.dataset.section, label: h.querySelector(".sign b").textContent };
       bd = d;
     }
   });
 
-  const p = boardingPoint();
-  const boatDist = Math.hypot(state.x - p.x, state.y - p.y);
-  if (boatDist < 125 && boatDist < bd) {
-    best = { type: "boat", label: "BARCO" };
+  const bridgeEl = document.querySelector(".bridge");
+  if (bridgeEl) {
+    const bRect = bridgeEl.getBoundingClientRect();
+    const bCenter = { x: bRect.left + bRect.width / 2 + window.scrollX, y: bRect.top + bRect.height / 2 + window.scrollY };
+    const boatDist = Math.hypot(pCenter.x - bCenter.x, pCenter.y - bCenter.y);
+    if (boatDist < 120 && boatDist < bd) {
+      best = { type: "boat", label: "BARCO" };
+    }
   }
 
   state.near = best;
@@ -180,7 +205,7 @@ function detectNear() {
 
 function isBridgePosition(x, y) {
   const halfWidth = 130;
-  return Math.abs(x - innerWidth / 2) <= halfWidth &&
+  return Math.abs(x - 480) <= halfWidth &&
          y >= seaTop() - 150 &&
          y <= seaTop() + 105;
 }
@@ -196,7 +221,7 @@ function teleport(x, y, instant = false, callback = null) {
     return false;
   }
 
-  const targetX = clamp(x, 36, innerWidth - 36);
+  const targetX = clamp(x, 36, 960 - 36);
   const targetY = clamp(y, 90, seaTop() + 105);
 
   if (instant) {
@@ -214,7 +239,6 @@ function teleport(x, y, instant = false, callback = null) {
   if (isTeleporting) return false;
   isTeleporting = true;
 
-  // Smooth fade-out ("suma devagarinho")
   player.style.transition = "opacity 0.2s ease-out";
   player.style.opacity = "0";
 
@@ -227,7 +251,6 @@ function teleport(x, y, instant = false, callback = null) {
     detectNear();
     cameraFollow();
 
-    // Smooth fade-in ("apareca")
     player.style.opacity = "1";
 
     setTimeout(() => {
@@ -241,7 +264,7 @@ function teleport(x, y, instant = false, callback = null) {
 }
 
 function movementBounds(nx, ny) {
-  nx = clamp(nx, 36, innerWidth - 36);
+  nx = clamp(nx, 36, 960 - 36);
   ny = clamp(ny, 90, seaTop() + 105);
 
   if (ny >= seaTop() - 8 && !isBridgePosition(nx, ny)) {
@@ -423,7 +446,9 @@ function returnBoat() {
 
 function cameraFollow() {
   if (state.boatStatus !== "docked") return;
-  const desired = Math.max(0, state.y - innerHeight * .55);
+  const scale = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--world-scale")) || 1;
+  const playerScreenY = state.y * scale;
+  const desired = Math.max(0, playerScreenY - window.innerHeight * 0.45);
   window.scrollTo({ top: desired, behavior: "auto" });
 }
 
@@ -485,10 +510,16 @@ window.addEventListener("keyup", e => keys.delete(e.key.length === 1 ? e.key.toL
 
 document.addEventListener("click", e => {
   if (e.target.closest("#topNav,#overlay,.social,#boat,.house,.bridge,.return-pier,#touchControls")) return;
-  const x = e.clientX;
-  const y = e.clientY + scrollY;
 
-  teleport(x, y, false);
+  const worldEl = document.getElementById("world");
+  if (!worldEl) return;
+  const worldRect = worldEl.getBoundingClientRect();
+  const scale = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--world-scale")) || 1;
+
+  const targetWorldX = (e.clientX - worldRect.left) / scale;
+  const targetWorldY = (e.clientY - worldRect.top) / scale;
+
+  teleport(targetWorldX, targetWorldY, false);
 });
 
 closeModal.addEventListener("click", closePanel);
@@ -501,7 +532,7 @@ document.querySelectorAll("[data-nav]").forEach(a => a.addEventListener("click",
 
   if (key === "home") {
     if (state.boatStatus !== "docked") returnBoat();
-    setTimeout(() => teleport(innerWidth * .5, 650, false), state.boatStatus === "docked" ? 0 : 4700);
+    setTimeout(() => teleport(480, 650, false), state.boatStatus === "docked" ? 0 : 4700);
     return;
   }
 
@@ -518,17 +549,27 @@ document.querySelectorAll("[data-nav]").forEach(a => a.addEventListener("click",
 
   const house = document.querySelector(`[data-section="${key}"]`);
   if (house) {
-    const p = houseDoorPoint(house);
-    teleport(p.x, p.y + 48, false, () => openPanel(key));
+    const doorP = houseDoorPoint(house);
+    const worldEl = document.getElementById("world");
+    const worldRect = worldEl.getBoundingClientRect();
+    const scale = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--world-scale")) || 1;
+    const targetX = (doorP.x - worldRect.left) / scale;
+    const targetY = (doorP.y - worldRect.top) / scale + 48;
+    teleport(targetX, targetY, false, () => openPanel(key));
   }
 }));
 
 document.querySelectorAll(".house").forEach(h => h.addEventListener("click", e => {
   e.stopPropagation();
   if (state.boatStatus !== "docked") return;
-  const p = houseDoorPoint(h);
+  const doorP = houseDoorPoint(h);
+  const worldEl = document.getElementById("world");
+  const worldRect = worldEl.getBoundingClientRect();
+  const scale = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--world-scale")) || 1;
+  const targetX = (doorP.x - worldRect.left) / scale;
+  const targetY = (doorP.y - worldRect.top) / scale + 48;
   const section = h.dataset.section;
-  teleport(p.x, p.y + 48, false, () => openPanel(section));
+  teleport(targetX, targetY, false, () => openPanel(section));
 }));
 
 bridge.addEventListener("click", e => {
@@ -554,11 +595,13 @@ document.addEventListener("click", e => {
 });
 
 window.addEventListener("resize", () => {
-  state.x = clamp(state.x, 36, innerWidth - 36);
+  updateWorldScale();
+  state.x = clamp(state.x, 36, 960 - 36);
   if (state.boatStatus === "docked") {
     player.style.left = state.x + "px";
   }
 });
+window.addEventListener("load", updateWorldScale);
 
 /* ===== Mobile Nav & Touch Controls Logic ===== */
 const hamburgerBtn = document.getElementById("hamburgerBtn");
