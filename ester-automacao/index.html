@@ -1,0 +1,453 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>Preview de Automação • Instagram + WhatsApp + Hotmart</title><style>:root{--ink:#060708;--paper:#eef3f7;--paper-2:#f8fafb;--line:#cfd8e2;--muted:#66717f;--blue:#2f64f5;--blue-soft:#dfe8ff;--green:#1faa59;--green-soft:#daf5e5;--pink:#e63f78;--pink-soft:#ffe0ea;--amber:#c88900;--danger:#c53e3e;--radius:18px;--shadow:0 18px 50px rgba(10,22,40,.08);}*{box-sizing:border-box}html{background:var(--paper)}body{margin:0;min-height:100vh;color:var(--ink);background:radial-gradient(circle at 1px 1px,rgba(21,42,68,.09) 1px,transparent 1.2px) 0 0 / 20px 20px,var(--paper);font-family:"Segoe UI Variable","Segoe UI",Arial,sans-serif;}button,input,textarea,select{font:inherit}button{color:inherit}:focus-visible{outline:3px solid rgba(47,100,245,.33);outline-offset:2px}.shell{min-height:100vh;display:grid;grid-template-rows:auto 1fr;}.topbar{min-height:82px;padding:18px 28px;border-bottom:1px solid rgba(6,7,8,.14);background:rgba(248,250,251,.88);backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:space-between;gap:24px;position:sticky;top:0;z-index:30;}.brand{display:flex;align-items:center;gap:14px;min-width:0;}.brand-mark{width:38px;height:38px;border:2px solid var(--ink);display:grid;place-items:center;border-radius:11px 11px 11px 3px;background:white;box-shadow:4px 4px 0 var(--ink);flex:0 0 auto;}.brand-mark svg{width:20px;height:20px}.brand-copy{min-width:0}.brand-title{font-family:Bahnschrift,"Arial Narrow",sans-serif;font-size:20px;line-height:1;letter-spacing:-.02em;margin:0;}.brand-sub{margin:5px 0 0;color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}.demo-pill{display:flex;align-items:center;gap:8px;border:1px solid var(--line);padding:8px 11px;border-radius:999px;background:white;font-size:12px;color:#4f5b69;flex:0 0 auto;}.demo-dot{width:8px;height:8px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 4px rgba(200,137,0,.12);}.workspace{display:grid;grid-template-columns:300px minmax(420px,1fr) 320px;gap:0;min-height:calc(100vh - 82px);}.rail{background:rgba(248,250,251,.9);border-right:1px solid rgba(6,7,8,.14);padding:24px 22px 30px;overflow:auto;}.trace{background:rgba(248,250,251,.9);border-left:1px solid rgba(6,7,8,.14);padding:24px 22px 30px;overflow:auto;}.section-title{font-family:Bahnschrift,"Arial Narrow",sans-serif;font-size:16px;margin:0 0 16px;}.section-copy{margin:-8px 0 18px;color:var(--muted);font-size:13px;line-height:1.55;}.channels{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--ink);background:white;margin-bottom:24px;}.channel-btn{border:0;padding:12px 10px;background:white;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:13px;}.channel-btn + .channel-btn{border-left:1px solid var(--ink)}.channel-btn.active[data-channel="instagram"]{background:var(--pink-soft)}.channel-btn.active[data-channel="whatsapp"]{background:var(--green-soft)}.channel-icon{width:18px;height:18px;display:inline-grid;place-items:center;flex:0 0 auto;}.channel-icon svg{width:18px;height:18px}.field{margin:0 0 15px}.field label{display:block;font-size:12px;font-weight:700;margin:0 0 6px;color:#35404d;}.control{width:100%;border:1px solid #aeb9c5;background:white;border-radius:10px;padding:10px 11px;color:var(--ink);box-shadow:inset 0 1px 0 rgba(255,255,255,.7);}textarea.control{resize:vertical;min-height:84px;line-height:1.45;}.switch-row{display:flex;align-items:flex-start;gap:10px;margin:16px 0;}.switch-row input{margin-top:3px}.switch-row strong{display:block;font-size:12px}.switch-row span{display:block;color:var(--muted);font-size:11px;line-height:1.45;margin-top:2px}.run-btn{width:100%;border:2px solid var(--ink);background:var(--blue);color:white;border-radius:12px;padding:12px 14px;font-weight:800;cursor:pointer;box-shadow:4px 4px 0 var(--ink);transition:transform .12s ease,box-shadow .12s ease;}.run-btn:hover{transform:translate(-1px,-1px);box-shadow:5px 5px 0 var(--ink)}.run-btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}.clear-btn{width:100%;border:0;background:transparent;padding:12px;margin-top:7px;color:var(--muted);cursor:pointer;text-decoration:underline;text-underline-offset:3px;}.stage{min-width:0;padding:28px;display:grid;place-items:center;overflow:hidden;}.demo-board{width:min(760px,100%);min-height:660px;position:relative;}.routing-line{position:absolute;inset:50% auto auto 50%;width:78%;height:78%;transform:translate(-50%,-50%);border:2px dashed rgba(47,100,245,.18);border-radius:44% 56% 55% 45% / 48% 42% 58% 52%;pointer-events:none;}.phone{width:min(410px,100%);height:690px;background:white;border:2px solid var(--ink);border-radius:34px;margin:auto;box-shadow:12px 12px 0 rgba(6,7,8,.10),var(--shadow);overflow:hidden;position:relative;z-index:3;display:flex;flex-direction:column;}.phone-cap{height:26px;display:grid;place-items:center;background:white;border-bottom:1px solid #e1e6eb;}.phone-cap span{width:74px;height:6px;border-radius:999px;background:var(--ink);}.app-head{min-height:58px;padding:10px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #e6eaee;background:white;}.profile-pic{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:13px;color:white;background:linear-gradient(135deg,#8a3ffc,#f03d77 52%,#ff9a3d);flex:0 0 auto;}.whatsapp-mode .profile-pic:not(.ester){background:#1faa59}.profile-pic.ester{background-image:url("ester-profile.jpg");background-size:cover;background-position:center;color:transparent;}.scenario-wrap{margin:0 0 22px}.scenario-wrap>label{display:block;font-size:12px;font-weight:700;margin:0 0 7px;color:#35404d}.scenario-modes{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--ink);background:white}.scenario-btn{min-width:0;border:0;background:white;padding:10px 5px;cursor:pointer;font-size:11px;line-height:1.2;font-weight:800}.scenario-btn + .scenario-btn{border-left:1px solid var(--ink)}.scenario-btn.active{background:var(--blue-soft);color:#173b9e}.scenario-help{min-height:34px;margin:8px 0 0;color:var(--muted);font-size:11px;line-height:1.45}.automation-reply{margin:7px 0 0 12px;padding:7px 9px;border-left:2px solid var(--pink);background:#fff;color:#73505d;font-size:10.5px;line-height:1.4}.lead-divider{display:flex;align-items:center;gap:8px;margin:12px 0 8px;color:#727d89;font-size:10px}.lead-divider::before,.lead-divider::after{content:"";height:1px;background:#d7dde3;flex:1}.conversation-separator{align-self:center;margin:7px 0 3px;padding:5px 8px;border-radius:999px;background:#e8edf2;color:#65717e;font-size:9.5px}.handoff-card{max-width:82%;align-self:flex-end;border:1px dashed #d2a544;background:#fff8e5;border-radius:13px;padding:10px 11px;font-size:11px;line-height:1.45;color:#725512}.app-head-copy{min-width:0}.app-head-copy strong{display:block;font-size:13px}.app-head-copy span{display:block;color:#7a8592;font-size:11px;margin-top:2px}.head-spacer{flex:1}.head-icon{width:20px;height:20px;color:#5d6774}.phone-body{flex:1;min-height:0;overflow:auto;background:#f7f8fa;position:relative;}.instagram-mode .phone-body{background:linear-gradient(#fff,#fbfbfc);}.whatsapp-mode .phone-body{background:linear-gradient(rgba(247,250,247,.92),rgba(247,250,247,.92)),radial-gradient(circle at 8px 8px,rgba(31,170,89,.10) 1.3px,transparent 1.4px) 0 0/18px 18px;}.instagram-feed{min-height:100%;padding-bottom:16px;}.ig-post{background:white;border-bottom:1px solid #e5e9ed;}.ig-post-top{padding:11px 13px;display:flex;align-items:center;gap:9px;}.ig-post-top .profile-pic{width:28px;height:28px;font-size:10px}.ig-post-top strong{font-size:12px}.post-visual{aspect-ratio:1/1;position:relative;overflow:hidden;background:linear-gradient(145deg,rgba(47,100,245,.90),rgba(90,58,240,.72) 35%,rgba(230,63,120,.76) 66%,rgba(255,159,67,.72));display:grid;align-items:end;}.post-visual::before{content:"";width:180px;height:180px;border:2px solid rgba(255,255,255,.55);border-radius:50%;position:absolute;right:-38px;top:-20px;}.post-visual::after{content:"";width:230px;height:70px;background:rgba(255,255,255,.13);transform:rotate(-12deg);position:absolute;left:-28px;top:120px;}.post-copy{padding:20px;color:white;position:relative;z-index:1;}.post-copy b{font-family:Bahnschrift,"Arial Narrow",sans-serif;font-size:29px;line-height:1.04;display:block;max-width:290px;letter-spacing:-.03em;}.post-copy span{display:block;font-size:12px;margin-top:9px;opacity:.9}.post-actions{padding:10px 13px 7px;display:flex;gap:14px;}.post-actions svg{width:20px;height:20px}.post-caption{padding:0 13px 12px;font-size:12px;line-height:1.45;}.comment-strip{margin:0 13px 12px;border-left:3px solid var(--pink);padding:8px 10px;background:#fff6f9;font-size:12px;line-height:1.45;}.comment-strip b{margin-right:6px}.comment-action{margin-top:5px;color:#8a6571;font-size:11px;}.handoff-banner{margin:12px 13px;border:1px solid #e5b4c4;background:var(--pink-soft);padding:10px 11px;font-size:11px;line-height:1.45;display:none;}.handoff-banner.show{display:block}.dm-pane{display:none;border-top:1px solid #e5e9ed;background:#fafbfc;padding:12px 13px 70px;}.dm-pane.show{display:block}.dm-title{font-size:11px;color:#7b8793;margin-bottom:8px;}.chat{min-height:100%;padding:14px 12px 74px;display:flex;flex-direction:column;gap:8px;}.bubble{max-width:82%;padding:9px 11px;border-radius:15px;font-size:12.5px;line-height:1.45;box-shadow:0 1px 1px rgba(0,0,0,.04);white-space:pre-wrap;animation:bubbleIn .22s ease both;}.bubble.in{align-self:flex-start;background:white;border:1px solid #e0e5e9;border-bottom-left-radius:4px;}.bubble.out{align-self:flex-end;background:#e7efff;border:1px solid #c9d8ff;border-bottom-right-radius:4px;}.whatsapp-mode .bubble.out{background:#dcf7e6;border-color:#beeacb;}.bubble small{display:block;margin-top:5px;color:#7e8792;font-size:9.5px;text-align:right;}.link-card{max-width:82%;align-self:flex-end;border:1px solid #bfd0ff;background:white;border-radius:13px;overflow:hidden;animation:bubbleIn .22s ease both;}.whatsapp-mode .link-card{border-color:#b8dfc4}.link-card-top{padding:10px 11px;background:#f3f6ff;border-bottom:1px solid #dce5ff;}.whatsapp-mode .link-card-top{background:#eefaf2;border-bottom-color:#d4eddb}.link-card-top b{display:block;font-size:12px}.link-card-top span{display:block;font-size:10px;color:#6b7581;margin-top:3px}.link-card a{display:block;padding:9px 11px;text-decoration:none;font-weight:800;font-size:11px;color:var(--blue);}.whatsapp-mode .link-card a{color:#138945}.composer{position:absolute;left:0;right:0;bottom:0;min-height:58px;background:rgba(255,255,255,.96);border-top:1px solid #e1e5e9;padding:9px 10px;display:flex;align-items:center;gap:8px;z-index:8;}.composer input{flex:1;min-width:0;border:1px solid #cdd5dd;border-radius:999px;padding:9px 11px;background:white;font-size:12px;}.send-btn{width:34px;height:34px;border-radius:50%;border:0;background:var(--blue);color:white;display:grid;place-items:center;cursor:pointer;flex:0 0 auto;}.whatsapp-mode .send-btn{background:var(--green)}.send-btn svg{width:16px;height:16px}.stage-note{position:absolute;right:0;top:70px;width:170px;background:var(--ink);color:white;padding:13px 14px;font-size:11px;line-height:1.5;border-radius:12px 12px 2px 12px;box-shadow:var(--shadow);z-index:4;}.stage-note strong{display:block;font-size:12px;margin-bottom:3px}.stage-note::after{content:"";position:absolute;left:-30px;top:24px;width:30px;height:1px;background:var(--ink);}.trace h2{font-family:Bahnschrift,"Arial Narrow",sans-serif;font-size:16px;margin:0;}.trace-sub{font-size:12px;color:var(--muted);line-height:1.5;margin:7px 0 19px}.trace-list{position:relative;padding-left:23px;}.trace-list::before{content:"";position:absolute;left:6px;top:7px;bottom:7px;width:1px;background:#b7c1cc;}.trace-item{position:relative;padding:0 0 18px 8px;opacity:.44;}.trace-item.done,.trace-item.active{opacity:1}.trace-dot{position:absolute;width:13px;height:13px;border-radius:50%;left:-23px;top:2px;background:#eef3f7;border:2px solid #8f9baa;z-index:2;}.trace-item.done .trace-dot{background:var(--blue);border-color:var(--blue);box-shadow:0 0 0 4px rgba(47,100,245,.12);}.instagram-trace .trace-item.done .trace-dot{background:var(--pink);border-color:var(--pink);box-shadow:0 0 0 4px rgba(230,63,120,.12)}.whatsapp-trace .trace-item.done .trace-dot{background:var(--green);border-color:var(--green);box-shadow:0 0 0 4px rgba(31,170,89,.12)}.trace-item.active .trace-dot{background:white;border-color:var(--blue);animation:pulse 1s infinite;}.trace-item strong{display:block;font-size:12px}.trace-item p{margin:4px 0 0;color:var(--muted);font-size:11px;line-height:1.45}.trace-time{font-family:Consolas,monospace;font-size:9px;color:#8c96a2;margin-top:4px;}.intent-box{border-top:1px solid #cbd4dd;margin-top:6px;padding-top:18px;}.intent-title{font-size:11px;font-weight:800;margin-bottom:9px}.intent-chips{display:flex;flex-wrap:wrap;gap:7px}.intent-chip{padding:6px 8px;background:white;border:1px solid #cfd7df;border-radius:999px;font-size:10px;}.intent-chip.hot{border-color:#9fb6ff;background:#eaf0ff;color:#2348b6}.instagram-trace .intent-chip.hot{border-color:#f0aac1;background:#ffe7ef;color:#a92250}.whatsapp-trace .intent-chip.hot{border-color:#9cd8ae;background:#e6f7eb;color:#14753b}.mode-label{position:absolute;left:0;bottom:32px;font-family:Bahnschrift,"Arial Narrow",sans-serif;font-size:18px;transform:rotate(-90deg);transform-origin:left bottom;color:rgba(6,7,8,.23);letter-spacing:.04em;}@keyframes bubbleIn{from{opacity:0;transform:translateY(5px) scale(.99)}to{opacity:1;transform:none}}@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(47,100,245,.22)}50%{box-shadow:0 0 0 6px rgba(47,100,245,0)}}@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}@media (max-width:1080px){.workspace{grid-template-columns:280px 1fr}.trace{grid-column:1/-1;border-left:0;border-top:1px solid rgba(6,7,8,.14);}.trace-list{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding-left:0}.trace-list::before{display:none}.trace-item{padding:10px;border:1px solid #cfd8e2;background:white}.trace-dot{display:none}.intent-box{margin-top:18px}}@media (max-width:760px){.topbar{padding:14px 16px;min-height:72px}.brand-sub{display:none}.demo-pill{font-size:11px}.workspace{display:block}.rail{border-right:0;border-bottom:1px solid rgba(6,7,8,.14);padding:18px 16px;}.stage{padding:22px 12px}.stage-note{display:none}.mode-label{display:none}.phone{height:660px;max-width:390px}.trace{padding:20px 16px}.trace-list{grid-template-columns:1fr}}</style></head><body><div class="shell"><header class="topbar"><div class="brand"><div class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6.5h9.2A3.8 3.8 0 0 1 18 10.3v.4a3.8 3.8 0 0 1-3.8 3.8H10l-4 3v-3H5a3 3 0 0 1-3-3v-2a3 3 0 0 1 3-3Z"/><path d="M17 6.2 21 3v3.2"/></svg></div><div class="brand-copy"><h1 class="brand-title">Ester Bonetti • atendimento automático</h1><p class="brand-sub">@esterbonetti_lashdesign • Instagram + WhatsApp + Hotmart</p></div></div></header><div class="workspace"><aside class="rail"><h2 class="section-title">Monte o cenário</h2><p class="section-copy">Troque a pergunta, o produto e o link para apresentar situações reais da cliente.</p><div class="channels" role="tablist" aria-label="Canal da demonstração"><button class="channel-btn active" data-channel="instagram" role="tab" aria-selected="true"><span class="channel-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.6" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg></span>
+          Instagram
+        </button><button class="channel-btn" data-channel="whatsapp" role="tab" aria-selected="false"><span class="channel-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4A8 8 0 1 1 20 11.5Z"/><path d="M9 8.8c.3 2.3 2 4.2 4.3 4.8"/></svg></span>
+          WhatsApp
+        </button></div><div class="scenario-wrap"><label>Tipo de demonstração</label><div class="scenario-modes" role="tablist" aria-label="Tipo de demonstração"><button class="scenario-btn active" data-scenario="quick" role="tab" aria-selected="true">Rápido</button><button class="scenario-btn" data-scenario="conversation" role="tab" aria-selected="false">Conversa</button><button class="scenario-btn" data-scenario="auto" role="tab" aria-selected="false">Automático</button></div><p class="scenario-help" id="scenarioHelp">Uma pergunta entra e a automação responde até o link da Hotmart.</p></div><div class="field"><label for="product">Produto</label><input id="product" class="control" value="Curso Lash Design" /></div><div class="field"><label for="hotmart">Link de compra na Hotmart</label><input id="hotmart" class="control" value="https://pay.hotmart.com/SEU-LINK" /></div><div class="field"><label for="customerText" id="customerLabel">Comentário da pessoa</label><textarea id="customerText" class="control">Quero saber o valor e como funciona</textarea></div><div class="field"><label for="baseReply">Primeira resposta</label><textarea id="baseReply" class="control">Oi! Claro 😊 Sou da equipe da Ester. Vou te explicar rapidinho.</textarea></div><label class="switch-row" id="publicReplyRow"><input type="checkbox" id="publicReply" checked /><span><strong>Responder também no comentário</strong><span>Exibe “Te mandei as informações na DM” antes da conversa privada.</span></span></label><button class="run-btn" id="simulate">Rodar cenário rápido</button><button class="clear-btn" id="reset">Reiniciar cenário</button></aside><main class="stage"><div class="demo-board"><div class="routing-line" aria-hidden="true"></div><div class="mode-label" id="modeLabel">COMENTÁRIO → DM</div><div class="stage-note" id="stageNote"><strong>O ponto principal</strong>
+          A cliente vê a entrada e o sistema faz o encaminhamento sozinho.
+        </div><section class="phone instagram-mode" id="phone" aria-label="Simulação de conversa"><div class="phone-cap"><span></span></div><div class="app-head"><div class="profile-pic ester" aria-label="Foto de Ester Bonetti"></div><div class="app-head-copy"><strong id="accountName">esterbonetti_lashdesign</strong><span id="channelSubtitle">Instagram • online</span></div><div class="head-spacer"></div><svg class="head-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="1"/><circle cx="5" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg></div><div class="phone-body" id="phoneBody"><div class="instagram-feed" id="instagramView"><article class="ig-post"><div class="ig-post-top"><div class="profile-pic ester" aria-label="Foto de Ester Bonetti"></div><strong>esterbonetti_lashdesign</strong></div><div class="post-visual"><div class="post-copy"><b>Uma oferta que começa com uma conversa.</b><span>Exemplo de post / anúncio da campanha</span></div></div><div class="post-actions" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6c-1.8-1.8-4.8-1.8-6.6 0L12 6.8 9.8 4.6a4.7 4.7 0 0 0-6.6 6.6L12 20l8.8-8.8a4.7 4.7 0 0 0 0-6.6Z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8 8 0 0 1-8.5 8L5 21l1.7-4A8 8 0 1 1 21 11.5Z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m22 2-9.7 19-2.2-8.5L2 9l20-7Z"/></svg></div><div class="post-caption"><b>esterbonetti_lashdesign</b> Conheça o método e veja se ele faz sentido para você.</div><div id="commentsArea"><div class="comment-strip" id="commentStrip"><b>@cliente_exemplo</b><span id="commentText">Quero saber o valor e como funciona</span><div class="comment-action">Responder • agora</div></div></div><div class="handoff-banner" id="handoffBanner">
+                  Resposta pública enviada: “Te mandei as informações na DM 😊”
+                </div></article><div class="dm-pane" id="dmPane"><div class="dm-title">Conversa privada iniciada automaticamente</div><div id="igChat"></div></div></div><div class="chat" id="whatsappView" hidden></div></div><div class="composer"><input id="manualMessage" placeholder="Escreva uma nova pergunta..." aria-label="Nova pergunta do cliente"/><button class="send-btn" id="sendManual" aria-label="Enviar mensagem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-9.7 19-2.2-8.5L2 9l20-7Z"/></svg></button></div></section></div></main><aside class="trace instagram-trace" id="trace"><h2>O que acontece por trás</h2><p class="trace-sub">A demonstração acende cada etapa conforme a automação avança.</p><div class="trace-list" id="traceList"><div class="trace-item" data-step="0"><span class="trace-dot"></span><strong id="step0Title">Comentário recebido</strong><p id="step0Text">A automação identifica uma nova interação no conteúdo.</p><div class="trace-time">aguardando</div></div><div class="trace-item" data-step="1"><span class="trace-dot"></span><strong>Intenção identificada</strong><p>Palavras como “valor”, “como funciona” ou “link” direcionam a resposta.</p><div class="trace-time">aguardando</div></div><div class="trace-item" data-step="2"><span class="trace-dot"></span><strong id="step2Title">DM aberta</strong><p id="step2Text">A conversa sai do comentário e continua em privado.</p><div class="trace-time">aguardando</div></div><div class="trace-item" data-step="3"><span class="trace-dot"></span><strong>Resposta enviada</strong><p>O texto certo é montado de acordo com a dúvida detectada.</p><div class="trace-time">aguardando</div></div><div class="trace-item" data-step="4"><span class="trace-dot"></span><strong>Link da Hotmart entregue</strong><p>O atendimento termina com o próximo passo claro para comprar.</p><div class="trace-time">aguardando</div></div></div><div class="intent-box"><div class="intent-title">Intenções detectadas</div><div class="intent-chips" id="intentChips"><span class="intent-chip">preço</span><span class="intent-chip">como funciona</span><span class="intent-chip">comprar</span><span class="intent-chip">acesso</span></div></div></aside></div></div><script>(() => {
+const $ = (q) => document.querySelector(q);
+const $$ = (q) => [...document.querySelectorAll(q)];
+const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+let channel = "instagram";
+let scenarioMode = "quick";
+let running = false;
+const els = {
+phone: $("#phone"), phoneBody: $("#phoneBody"),
+instagramView: $("#instagramView"), whatsappView: $("#whatsappView"),
+igChat: $("#igChat"), dmPane: $("#dmPane"),
+handoffBanner: $("#handoffBanner"), commentsArea: $("#commentsArea"),
+customerText: $("#customerText"), customerLabel: $("#customerLabel"),
+channelSubtitle: $("#channelSubtitle"), accountName: $("#accountName"),
+modeLabel: $("#modeLabel"), stageNote: $("#stageNote"), trace: $("#trace"),
+publicReplyRow: $("#publicReplyRow"), publicReply: $("#publicReply"),
+intentChips: $("#intentChips"), manualMessage: $("#manualMessage"),
+scenarioHelp: $("#scenarioHelp"), simulate: $("#simulate"),
+step0Title: $("#step0Title"), step0Text: $("#step0Text"),
+step2Title: $("#step2Title"), step2Text: $("#step2Text")
+};
+const now = () => new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit",second:"2-digit"});
+const scenarioText = {
+quick: {
+help:"Uma pergunta entra e a automação responde até o link da Hotmart.",
+button:"Rodar cenário rápido"
+},
+conversation: {
+help:"Um mesmo lead faz várias perguntas e a conversa evolui automaticamente.",
+button:"Rodar conversa completa"
+},
+auto: {
+help:"Vários leads entram em sequência para mostrar a automação trabalhando sozinha.",
+button:"Rodar demonstração automática"
+}
+};
+const autoLeads = [
+{name:"@jessica.souza", text:"Quanto custa? Dá para parcelar?"},
+{name:"@lari.mendes", text:"Tem certificado no final?"},
+{name:"@camila.rocha", text:"Como funciona? Serve para quem está começando do zero?"},
+{name:"@bia.lima", text:"Por quanto tempo tenho acesso? Me manda o link"}
+];
+const followUps = [
+"Serve para quem está começando do zero?",
+"Tem certificado?",
+"Posso parcelar no cartão?",
+"Por quanto tempo eu tenho acesso?",
+"Me manda o link para eu ver?"
+];
+function escapeHTML(str){
+return String(str).replace(/[&<>"']/g, c => ({
+"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+}[c]));
+}
+function detectIntent(text){
+const t = text.toLowerCase();
+const found = [];
+const push = (x) => { if (!found.includes(x)) found.push(x); };
+if (/(valor|preço|preco|quanto|custa|investimento|fica por)/.test(t)) push("preço");
+if (/(como funciona|funciona|como é|como e|o que vem|conteúdo|conteudo|aulas|módulo|modulo|metodologia)/.test(t)) push("como funciona");
+if (/(link|comprar|quero comprar|manda|envia|adquirir|inscri|checkout)/.test(t)) push("comprar");
+if (/(acesso|recebo|liberado|liberação|entrega|vitalício|vitalicio|quanto tempo)/.test(t)) push("acesso");
+if (/(certificado|certificação|certificacao)/.test(t)) push("certificado");
+if (/(iniciante|começando|comecando|do zero|nunca fiz|sem experiência|sem experiencia)/.test(t)) push("iniciante");
+if (/(parcel|cartão|cartao|pix|boleto|pagamento|forma de pagar|vezes)/.test(t)) push("pagamento");
+if (/(garantia|reembolso|devolução|devolucao)/.test(t)) push("garantia");
+if (/(suporte|ajuda|tirar dúvidas|tirar duvidas|grupo)/.test(t)) push("suporte");
+if (/(agendar|agenda|horário|horario|marcar atendimento)/.test(t)) push("agendamento");
+if (/(humano|atendente|falar com alguém|falar com alguem|dúvida específica|duvida especifica)/.test(t)) push("atendimento humano");
+return found.length ? found : ["dúvida geral"];
+}
+function composeAnswer(text, includeGreeting=true){
+const product = $("#product").value.trim() || "produto";
+const base = $("#baseReply").value.trim() || "Oi! Claro 😊";
+const intents = detectIntent(text);
+const blocks = [];
+if (includeGreeting) blocks.push(base);
+if (intents.includes("preço"))
+blocks.push(`O valor e as condições atualizadas do ${product} ficam no checkout da Hotmart. Assim você vê o preço vigente antes de finalizar.`);
+if (intents.includes("como funciona"))
+blocks.push(`O ${product} é apresentado de forma online e organizada por etapas. A automação pode explicar aqui exatamente como o conteúdo é entregue.`);
+if (intents.includes("iniciante"))
+blocks.push(`Essa resposta pode ser configurada conforme o público do produto. Neste exemplo, eu explicaria se ele é indicado para quem está começando do zero.`);
+if (intents.includes("certificado"))
+blocks.push(`A informação sobre certificado fica cadastrada no fluxo e é respondida automaticamente sempre que alguém perguntar.`);
+if (intents.includes("pagamento"))
+blocks.push(`As formas de pagamento e parcelamento disponíveis aparecem no checkout da Hotmart antes da confirmação.`);
+if (intents.includes("acesso"))
+blocks.push(`Depois da aprovação do pagamento, a pessoa recebe as orientações de acesso conforme a configuração do produto.`);
+if (intents.includes("garantia"))
+blocks.push(`A automação também pode informar a regra de garantia e reembolso exatamente como ela estiver definida para o produto.`);
+if (intents.includes("suporte"))
+blocks.push(`Se houver suporte, grupo ou canal de dúvidas, essa informação também pode ser enviada automaticamente aqui.`);
+if (intents.includes("agendamento"))
+blocks.push(`Esse tipo de pedido pode ser direcionado para um link de agenda ou para atendimento humano.`);
+if (intents.includes("atendimento humano"))
+blocks.push(`Essa dúvida pode ser transferida para atendimento humano sem perder o histórico da conversa.`);
+if (intents[0] === "dúvida geral")
+blocks.push(`Posso te passar as informações principais do ${product}. Se a pergunta sair do que foi configurado, o atendimento pode ser encaminhado para uma pessoa.`);
+return {
+text:blocks.join("\n\n"),
+intents,
+needsHuman:intents.includes("atendimento humano") || intents[0] === "dúvida geral"
+};
+}
+function makeBubble(text, direction="out"){
+const d = document.createElement("div");
+d.className = `bubble ${direction}`;
+d.innerHTML = `${escapeHTML(text).replace(/\n/g,"<br>")}<small>${now().slice(0,5)}</small>`;
+return d;
+}
+function makeLinkCard(){
+const product = $("#product").value.trim() || "Produto";
+const hotmart = $("#hotmart").value.trim() || "#";
+const d = document.createElement("div");
+d.className = "link-card";
+d.innerHTML = `
+<div class="link-card-top"><b>${escapeHTML(product)}</b><span>Checkout seguro na Hotmart</span></div><a href="${escapeHTML(hotmart)}" target="_blank" rel="noopener">Abrir página de compra</a>`;
+return d;
+}
+function makeHandoffCard(){
+const d = document.createElement("div");
+d.className = "handoff-card";
+d.innerHTML = "<b>Atendimento humano solicitado</b><br>O histórico fica disponível para a Ester continuar a conversa.";
+return d;
+}
+function makeLeadDivider(name){
+const d = document.createElement("div");
+d.className = "lead-divider";
+d.textContent = `DM para ${name}`;
+return d;
+}
+function makeConversationDivider(name){
+const d = document.createElement("div");
+d.className = "conversation-separator";
+d.textContent = `Nova conversa • ${name}`;
+return d;
+}
+function makePublicComment(name,text,withReply=false){
+const d = document.createElement("div");
+d.className = "comment-strip";
+d.innerHTML = `
+<b>${escapeHTML(name)}</b><span>${escapeHTML(text)}</span><div class="comment-action">Responder • agora</div>
+${withReply ? '<div class="automation-reply">esterbonetti_lashdesign: Te mandei as informações na DM 😊</div>' : ''}`;
+return d;
+}
+function renderSingleComment(text){
+els.commentsArea.innerHTML = "";
+els.commentsArea.appendChild(makePublicComment("@cliente_exemplo",text,false));
+}
+function resetTrace(){
+$$(".trace-item").forEach(item => {
+item.classList.remove("done","active");
+item.querySelector(".trace-time").textContent = "aguardando";
+});
+$$(".intent-chip").forEach(chip => chip.classList.remove("hot"));
+}
+function markStep(index,state="done"){
+const item = $(`.trace-item[data-step="${index}"]`);
+if (!item) return;
+item.classList.remove("done","active");
+item.classList.add(state);
+item.querySelector(".trace-time").textContent = state === "done" ? now() : "processando…";
+}
+function showIntents(intents){
+const base = ["preço","como funciona","comprar","acesso","certificado","iniciante","pagamento","suporte"];
+const visible = [...new Set([...intents,...base])].slice(0,8);
+els.intentChips.innerHTML = visible.map(x =>
+`<span class="intent-chip ${intents.includes(x) ? "hot" : ""}">${escapeHTML(x)}</span>`
+).join("");
+}
+function setScenario(next){
+if (running) return;
+scenarioMode = next;
+$$(".scenario-btn").forEach(btn => {
+const active = btn.dataset.scenario === next;
+btn.classList.toggle("active",active);
+btn.setAttribute("aria-selected",String(active));
+});
+els.scenarioHelp.textContent = scenarioText[next].help;
+els.simulate.textContent = scenarioText[next].button;
+resetScenario(false);
+}
+function setChannel(next){
+if (running) return;
+channel = next;
+$$(".channel-btn").forEach(btn => {
+const active = btn.dataset.channel === next;
+btn.classList.toggle("active",active);
+btn.setAttribute("aria-selected",String(active));
+});
+const ig = next === "instagram";
+els.phone.classList.toggle("instagram-mode",ig);
+els.phone.classList.toggle("whatsapp-mode",!ig);
+els.instagramView.hidden = !ig;
+els.whatsappView.hidden = ig;
+els.accountName.textContent = ig ? "esterbonetti_lashdesign" : "Ester Bonetti | Lash Design";
+els.channelSubtitle.textContent = ig ? "Instagram • online" : "WhatsApp • online";
+els.customerLabel.textContent = ig ? "Comentário da pessoa" : "Mensagem da pessoa";
+els.modeLabel.textContent = ig ? "COMENTÁRIO → DM" : "MENSAGEM → RESPOSTA";
+els.stageNote.innerHTML = ig
+? "<strong>O ponto principal</strong>Um comentário público pode virar uma conversa privada com o link certo."
+: "<strong>O ponto principal</strong>A nova mensagem entra e recebe a resposta sem alguém precisar abrir o WhatsApp.";
+els.trace.classList.toggle("instagram-trace",ig);
+els.trace.classList.toggle("whatsapp-trace",!ig);
+els.publicReplyRow.style.display = ig ? "flex" : "none";
+els.step0Title.textContent = ig ? "Comentário recebido" : "Mensagem recebida";
+els.step0Text.textContent = ig
+? "A automação identifica uma nova interação no conteúdo."
+: "A automação identifica a nova conversa no WhatsApp.";
+els.step2Title.textContent = ig ? "DM aberta" : "Conversa assumida";
+els.step2Text.textContent = ig
+? "A conversa sai do comentário e continua em privado."
+: "O fluxo automático assume a conversa e prepara a resposta.";
+resetScenario(false);
+}
+function resetScenario(resetText=true){
+running = false;
+resetTrace();
+els.handoffBanner.classList.remove("show");
+els.dmPane.classList.remove("show");
+els.igChat.innerHTML = "";
+els.whatsappView.innerHTML = "";
+if (resetText){
+els.customerText.value = channel === "instagram"
+? "Quero saber o valor e como funciona"
+: "Oi, vi o anúncio. Quanto custa e como funciona?";
+}
+renderSingleComment(els.customerText.value.trim() || "Quero saber mais");
+els.phoneBody.scrollTop = 0;
+}
+async function traceEntry(intents){
+markStep(0,"active"); await sleep(330); markStep(0);
+markStep(1,"active"); await sleep(300); showIntents(intents); markStep(1);
+}
+async function runQuick(){
+const incoming = els.customerText.value.trim() || "Quero saber mais";
+const r = composeAnswer(incoming,true);
+renderSingleComment(incoming);
+if (channel === "instagram"){
+els.handoffBanner.classList.remove("show");
+els.dmPane.classList.remove("show");
+els.igChat.innerHTML = "";
+await traceEntry(r.intents);
+if (els.publicReply.checked){
+els.handoffBanner.classList.add("show");
+els.handoffBanner.scrollIntoView({behavior:"smooth",block:"nearest"});
+await sleep(360);
+}
+markStep(2,"active");
+els.dmPane.classList.add("show");
+els.igChat.appendChild(makeBubble("Oi! Vi seu comentário e te chamei por aqui 😊","out"));
+await sleep(300); markStep(2);
+markStep(3,"active");
+els.igChat.appendChild(makeBubble(r.text,"out"));
+if (r.needsHuman) els.igChat.appendChild(makeHandoffCard());
+els.dmPane.scrollIntoView({behavior:"smooth",block:"nearest"});
+await sleep(410); markStep(3);
+markStep(4,"active");
+els.igChat.appendChild(makeLinkCard());
+await sleep(260); markStep(4);
+} else {
+els.whatsappView.innerHTML = "";
+els.whatsappView.appendChild(makeBubble(incoming,"in"));
+await traceEntry(r.intents);
+markStep(2,"active"); await sleep(240); markStep(2);
+markStep(3,"active");
+els.whatsappView.appendChild(makeBubble(r.text,"out"));
+if (r.needsHuman) els.whatsappView.appendChild(makeHandoffCard());
+els.phoneBody.scrollTop = els.phoneBody.scrollHeight;
+await sleep(410); markStep(3);
+markStep(4,"active");
+els.whatsappView.appendChild(makeLinkCard());
+els.phoneBody.scrollTop = els.phoneBody.scrollHeight;
+await sleep(260); markStep(4);
+}
+}
+async function runConversation(){
+const first = els.customerText.value.trim() || "Oi! Como funciona?";
+const firstResult = composeAnswer(first,true);
+if (channel === "instagram"){
+renderSingleComment(first);
+els.igChat.innerHTML = "";
+els.dmPane.classList.remove("show");
+els.handoffBanner.classList.remove("show");
+await traceEntry(firstResult.intents);
+if (els.publicReply.checked){
+els.handoffBanner.classList.add("show");
+await sleep(320);
+}
+markStep(2,"active");
+els.dmPane.classList.add("show");
+els.igChat.appendChild(makeBubble("Oi! Vi seu comentário e te chamei por aqui 😊","out"));
+await sleep(280); markStep(2);
+markStep(3,"active");
+els.igChat.appendChild(makeBubble(firstResult.text,"out"));
+await sleep(350); markStep(3);
+for (const q of followUps){
+els.igChat.appendChild(makeBubble(q,"in"));
+els.dmPane.scrollIntoView({behavior:"smooth",block:"nearest"});
+await sleep(280);
+const r = composeAnswer(q,false);
+showIntents(r.intents);
+els.igChat.appendChild(makeBubble(r.text,"out"));
+await sleep(330);
+}
+markStep(4,"active");
+els.igChat.appendChild(makeLinkCard());
+await sleep(260); markStep(4);
+} else {
+els.whatsappView.innerHTML = "";
+els.whatsappView.appendChild(makeBubble(first,"in"));
+await traceEntry(firstResult.intents);
+markStep(2,"active"); await sleep(230); markStep(2);
+markStep(3,"active");
+els.whatsappView.appendChild(makeBubble(firstResult.text,"out"));
+await sleep(350); markStep(3);
+for (const q of followUps){
+els.whatsappView.appendChild(makeBubble(q,"in"));
+els.phoneBody.scrollTop = els.phoneBody.scrollHeight;
+await sleep(280);
+const r = composeAnswer(q,false);
+showIntents(r.intents);
+els.whatsappView.appendChild(makeBubble(r.text,"out"));
+els.phoneBody.scrollTop = els.phoneBody.scrollHeight;
+await sleep(330);
+}
+markStep(4,"active");
+els.whatsappView.appendChild(makeLinkCard());
+els.phoneBody.scrollTop = els.phoneBody.scrollHeight;
+await sleep(260); markStep(4);
+}
+}
+async function runAuto(){
+resetTrace();
+els.handoffBanner.classList.remove("show");
+if (channel === "instagram"){
+els.commentsArea.innerHTML = "";
+els.igChat.innerHTML = "";
+els.dmPane.classList.remove("show");
+for (const lead of autoLeads){
+resetTrace();
+const comment = makePublicComment(lead.name,lead.text,false);
+els.commentsArea.appendChild(comment);
+comment.scrollIntoView({behavior:"smooth",block:"nearest"});
+const r = composeAnswer(lead.text,true);
+await traceEntry(r.intents);
+if (els.publicReply.checked){
+const reply = document.createElement("div");
+reply.className = "automation-reply";
+reply.textContent = "esterbonetti_lashdesign: Te mandei as informações na DM 😊";
+comment.appendChild(reply);
+await sleep(260);
+}
+markStep(2,"active");
+els.dmPane.classList.add("show");
+els.igChat.appendChild(makeLeadDivider(lead.name));
+els.igChat.appendChild(makeBubble(`Oi! Vi seu comentário: “${lead.text}”`,"out"));
+await sleep(220); markStep(2);
+markStep(3,"active");
+els.igChat.appendChild(makeBubble(r.text,"out"));
+await sleep(300); markStep(3);
+markStep(4,"active");
+els.igChat.appendChild(makeLinkCard());
+await sleep(220); markStep(4);
+els.dmPane.scrollIntoView({behavior:"smooth",block:"nearest"});
+await sleep(320);
+}
+} else {
+els.whatsappView.innerHTML = "";
+for (const lead of autoLeads){
+resetTrace();
+els.whatsappView.appendChild(makeConversationDivider(lead.name));
+els.whatsappView.appendChild(makeBubble(lead.text,"in"));
+els.phoneBody.scrollTop = els.phoneBody.scrollHeight;
+const r = composeAnswer(lead.text,true);
+await traceEntry(r.intents);
+markStep(2,"active"); await sleep(200); markStep(2);
+markStep(3,"active");
+els.whatsappView.appendChild(makeBubble(r.text,"out"));
+await sleep(290); markStep(3);
+markStep(4,"active");
+els.whatsappView.appendChild(makeLinkCard());
+els.phoneBody.scrollTop = els.phoneBody.scrollHeight;
+await sleep(220); markStep(4);
+await sleep(320);
+}
+}
+}
+async function runDemo(){
+if (running) return;
+running = true;
+els.simulate.disabled = true;
+try{
+resetTrace();
+if (scenarioMode === "quick") await runQuick();
+if (scenarioMode === "conversation") await runConversation();
+if (scenarioMode === "auto") await runAuto();
+} finally {
+running = false;
+els.simulate.disabled = false;
+}
+}
+async function sendManual(){
+if (running) return;
+const text = els.manualMessage.value.trim();
+if (!text) return;
+els.manualMessage.value = "";
+const r = composeAnswer(text,false);
+showIntents(r.intents);
+if (channel === "instagram"){
+if (!els.dmPane.classList.contains("show")) els.dmPane.classList.add("show");
+els.igChat.appendChild(makeBubble(text,"in"));
+await sleep(230);
+els.igChat.appendChild(makeBubble(r.text,"out"));
+if (r.needsHuman) els.igChat.appendChild(makeHandoffCard());
+if (r.intents.includes("comprar") || r.intents.includes("preço") || r.intents.includes("pagamento"))
+els.igChat.appendChild(makeLinkCard());
+els.dmPane.scrollIntoView({behavior:"smooth",block:"nearest"});
+} else {
+els.whatsappView.appendChild(makeBubble(text,"in"));
+els.phoneBody.scrollTop = els.phoneBody.scrollHeight;
+await sleep(230);
+els.whatsappView.appendChild(makeBubble(r.text,"out"));
+if (r.needsHuman) els.whatsappView.appendChild(makeHandoffCard());
+if (r.intents.includes("comprar") || r.intents.includes("preço") || r.intents.includes("pagamento"))
+els.whatsappView.appendChild(makeLinkCard());
+els.phoneBody.scrollTop = els.phoneBody.scrollHeight;
+}
+}
+$$(".channel-btn").forEach(btn => btn.addEventListener("click",() => setChannel(btn.dataset.channel)));
+$$(".scenario-btn").forEach(btn => btn.addEventListener("click",() => setScenario(btn.dataset.scenario)));
+$("#simulate").addEventListener("click",runDemo);
+$("#reset").addEventListener("click",() => resetScenario(true));
+$("#sendManual").addEventListener("click",sendManual);
+els.manualMessage.addEventListener("keydown",(e) => {
+if (e.key === "Enter"){ e.preventDefault(); sendManual(); }
+});
+els.customerText.addEventListener("input",() => {
+if (!running && scenarioMode === "quick" && channel === "instagram")
+renderSingleComment(els.customerText.value || "Quero saber mais");
+});
+setChannel("instagram");
+setScenario("quick");
+})();</script></body></html>
