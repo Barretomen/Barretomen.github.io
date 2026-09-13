@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Assinatura João Barreto</title>
+<style>
+  body{margin:0;background:#eef3f7;font-family:Arial,Helvetica,sans-serif;color:#111827;padding:32px}
+  .wrap{max-width:760px;margin:0 auto}
+  .panel{background:#fff;border:1px solid #dbe3ea;border-radius:18px;padding:24px;box-shadow:0 8px 30px rgba(22,34,51,.08)}
+  h1{font-size:18px;margin:0 0 8px}.hint{margin:0 0 20px;color:#667085;font-size:13px}
+  .actions{display:flex;gap:10px;align-items:center;margin-top:20px;flex-wrap:wrap}
+  button{border:0;border-radius:10px;padding:11px 16px;font-weight:700;cursor:pointer;background:#111827;color:#fff}
+  #status{font-size:13px;color:#16865a;font-weight:700}
+  .preview{background:#fff;padding:10px;display:inline-block}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="panel">
+    <h1>Assinatura de email — João Barreto</h1>
+    <p class="hint">Clique em “Copiar assinatura” e cole diretamente no Gmail. A foto é carregada por um endereço público HTTPS.</p>
+    <div class="preview" id="signatureHost"></div>
+    <div class="actions">
+      <button id="copyBtn">Copiar assinatura</button>
+      <span id="status"></span>
+    </div>
+  </div>
+</div>
+<script>
+const signature = `
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate;border-spacing:0;font-family:'Courier New',Courier,monospace;background:#ffffff;border:1px solid #d7dee6;border-radius:18px;box-shadow:0 2px 7px rgba(26,46,66,.12);">
+  <tr>
+    <td style="padding:18px 20px 8px 20px;">
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
+        <tr>
+          <td style="vertical-align:middle;padding-right:16px;">
+            <img src="https://barretomen.github.io/assets/joao_email_avatar.jpg" width="82" height="82" alt="João Barreto" style="display:block;width:82px;height:82px;border-radius:50%;object-fit:cover;border:3px solid #7c6fe8;">
+          </td>
+          <td style="vertical-align:middle;">
+            <div style="font-size:17px;line-height:20px;font-weight:700;color:#111827;letter-spacing:.2px;">João Barreto</div>
+            <div style="font-size:12px;line-height:18px;color:#374151;text-transform:uppercase;letter-spacing:.8px;">Developer &amp; Automation Specialist</div>
+            <div style="font-size:11px;line-height:17px;color:#667085;margin-top:2px;">Barreto Digital Solutions</div>
+            <div style="font-size:12px;line-height:18px;color:#111827;margin-top:7px;">
+              <span style="color:#667085;">email</span>
+              <a href="mailto:imjoaobarreto@gmail.com" style="color:#111827;text-decoration:none;"> imjoaobarreto@gmail.com</a><br>
+              <span style="color:#667085;">phone</span>
+              <a href="tel:+351921176038" style="color:#111827;text-decoration:none;"> +351 921 176 038</a>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:4px 20px 16px 20px;">
+      <table role="presentation" cellpadding="0" cellspacing="6" border="0" style="border-collapse:separate;">
+        <tr>
+          <td><a href="https://barretomen.github.io/" style="display:inline-block;padding:6px 14px;border:1px solid #111827;border-radius:999px;font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:700;color:#111827;text-decoration:none;">PORTFÓLIO</a></td>
+          <td><a href="https://wa.me/351921176038" style="display:inline-block;padding:6px 14px;border:1px solid #22a06b;border-radius:999px;font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:700;color:#16865a;text-decoration:none;">WHATSAPP</a></td>
+          <td><a href="mailto:imjoaobarreto@gmail.com" style="display:inline-block;padding:6px 14px;border:1px solid #2485d0;border-radius:999px;font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:700;color:#1670b8;text-decoration:none;">EMAIL</a></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>`;
+
+document.getElementById('signatureHost').innerHTML = signature;
+
+document.getElementById('copyBtn').addEventListener('click', async () => {
+  const status = document.getElementById('status');
+  try {
+    const htmlBlob = new Blob([signature], {type:'text/html'});
+    const textBlob = new Blob(['João Barreto\nDeveloper & Automation Specialist\nBarreto Digital Solutions\nimjoaobarreto@gmail.com\n+351 921 176 038'], {type:'text/plain'});
+    await navigator.clipboard.write([new ClipboardItem({'text/html':htmlBlob,'text/plain':textBlob})]);
+    status.textContent = 'Copiada! Agora cole no Gmail com Ctrl+V.';
+  } catch (e) {
+    const range=document.createRange();
+    range.selectNodeContents(document.getElementById('signatureHost'));
+    const sel=window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
+    document.execCommand('copy'); sel.removeAllRanges();
+    status.textContent = 'Copiada! Agora cole no Gmail com Ctrl+V.';
+  }
+});
+</script>
+</body>
+</html>
