@@ -1,0 +1,36 @@
+name: Render Google Wallet contact assets
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'assets/wallet/joao_barreto_wallet_logo.svg'
+      - 'assets/wallet/render_wallet_assets.py'
+      - '.github/workflows/render-wallet-assets.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install render dependencies
+        run: pip install pillow cairosvg
+      - name: Render PNG assets
+        run: python assets/wallet/render_wallet_assets.py
+      - name: Commit rendered assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/wallet/joao_barreto_wallet_logo.png assets/wallet/joao_barreto_wallet_hero.png
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "Render Google Wallet contact assets"
+            git push
+          fi
