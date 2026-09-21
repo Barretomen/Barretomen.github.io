@@ -1,177 +1,92 @@
-<!DOCTYPE html>
-<html lang="pt-PT" data-entry-source="direct">
+<!doctype html>
+<html lang="pt-PT">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#F3F7FB">
-  <meta name="color-scheme" content="light">
-  <meta name="description" content="João Barreto — developer focado em apps, automações e soluções digitais. Contactos, projetos e presença online num só lugar.">
+  <meta name="description" content="João Barreto constrói aplicações, automações e ferramentas digitais para problemas reais.">
   <link rel="canonical" href="https://barretomen.github.io/hub/">
-
-  <meta property="og:type" content="profile">
-  <meta property="og:locale" content="pt_PT">
-  <meta property="og:title" content="João Barreto — Digital Hub">
-  <meta property="og:description" content="Apps, automações e soluções digitais. Contactos, projetos e presença online num só lugar.">
-  <meta property="og:url" content="https://barretomen.github.io/hub/">
+  <meta property="og:title" content="João Barreto — Developer & Automation">
+  <meta property="og:description" content="Aplicações, automações e ferramentas digitais construídas para problemas reais.">
   <meta property="og:image" content="https://barretomen.github.io/assets/wallet/joao_barreto_wallet_photo.jpg">
-  <meta property="og:image:alt" content="Retrato de João Barreto">
-  <meta property="profile:first_name" content="João">
-  <meta property="profile:last_name" content="Barreto">
-
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="João Barreto — Digital Hub">
-  <meta name="twitter:description" content="Apps, automações e soluções digitais.">
-  <meta name="twitter:image" content="https://barretomen.github.io/assets/wallet/joao_barreto_wallet_photo.jpg">
-
-  <title>João Barreto — Digital Hub</title>
+  <title>João Barreto — Developer & Automation</title>
   <link rel="icon" href="/assets/wallet/joao_barreto_wallet_logo.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Source+Sans+3:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css">
   <link rel="stylesheet" href="./english-theme.css">
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "João Barreto",
-    "url": "https://barretomen.github.io/hub/",
-    "image": "https://barretomen.github.io/assets/wallet/joao_barreto_wallet_photo.jpg",
-    "email": "mailto:imjoaobarreto@gmail.com",
-    "telephone": "+351921176038",
-    "sameAs": [
-      "https://www.instagram.com/jaobm_/",
-      "https://github.com/Barretomen",
-      "https://www.linkedin.com/in/barretomendes/"
-    ]
-  }
-  </script>
+  <link rel="stylesheet" href="./portfolio.css">
 </head>
 <body>
   <a class="skip-link" href="#main-content">Saltar para o conteúdo</a>
-
-  <svg class="signal-field" viewBox="0 0 1440 1100" aria-hidden="true" focusable="false">
-    <path class="signal-field__path" d="M-80 228C225 116 310 420 586 307S1000 94 1520 246" />
-    <path class="signal-field__echo" d="M-40 790C350 610 620 920 940 730s410-84 580-18" />
-  </svg>
-
   <header class="site-header">
-    <a class="brand-chip" href="./" aria-label="João Hub — início">
+    <a class="brand-chip" href="/hub/" aria-label="João Hub — início">
       <span class="brand-chip__mark"><img src="/assets/wallet/joao_barreto_wallet_logo.svg" alt="" width="34" height="34"></span>
       <span class="brand-chip__name">joão<span>hub</span></span>
     </a>
-    <span class="permanent-address">barretomen.github.io/j/</span>
+    <nav class="site-nav" aria-label="Navegação principal">
+      <a href="/hub/" aria-current="page">Início</a>
+      <a href="/hub/projects/">Projetos</a>
+      <a href="/hub/about/">Sobre</a>
+      <a href="/hub/now/">Agora</a>
+      <a href="/hub/contact/">Contacto</a>
+    </nav>
   </header>
 
-  <main id="main-content">
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero__portrait-column">
-        <div class="portrait-shell">
-          <img src="/assets/wallet/joao_barreto_wallet_photo.jpg" alt="João Barreto em frente à Torre Eiffel" width="660" height="660" fetchpriority="high">
-          <span class="portrait-shell__signal" aria-hidden="true"></span>
+  <main class="page-main" id="main-content">
+    <section class="page-hero" aria-labelledby="home-title">
+      <div class="page-hero__copy">
+        <p class="page-kicker">João Barreto · Portugal</p>
+        <h1 id="home-title">Sistemas pequenos. Impacto concreto.</h1>
+        <p class="page-hero__statement">Construo aplicações e automações para retirar passos repetitivos, ligar ferramentas e deixar decisões importantes sob controlo humano.</p>
+        <div class="hero-actions">
+          <a class="button button--red" href="/hub/projects/">Explorar projetos</a>
+          <a class="button button--light" id="whatsapp-cta" href="https://wa.me/351921176038" target="_blank" rel="noopener noreferrer">Conversar comigo</a>
         </div>
-        <p class="availability"><span aria-hidden="true"></span> Disponível para construir</p>
       </div>
+      <aside class="page-hero__aside">
+        <strong>Do script ao produto.</strong>
+        <p>Extensões, Apps Script, ferramentas web e aplicações desktop nascem do mesmo princípio: resolver o trabalho que realmente acontece.</p>
+      </aside>
+    </section>
 
-      <div class="hero__content">
-        <p class="hero__role">Developer · Automation · Tech</p>
-        <h1 id="hero-title">João<br><span>Barreto</span></h1>
-        <p class="hero__statement">Construo apps, automações e soluções digitais.</p>
+    <section class="content-section" aria-labelledby="featured-title">
+      <div class="section-heading section-heading--split">
+        <h2 id="featured-title">Projetos em destaque</h2>
+        <p>Três linhas de trabalho que mostram como observo um fluxo, construo uma solução e evoluo o que já funciona.</p>
+      </div>
+      <div class="featured-grid" id="featured-projects"></div>
+    </section>
 
-        <div class="primary-actions" role="group" aria-label="Ações principais">
-          <a class="action action--primary" id="whatsapp-cta" href="https://wa.me/351921176038" target="_blank" rel="noopener noreferrer">
-            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.6 0 .3 5.3.3 11.8c0 2.1.5 4.1 1.6 5.9L.2 24l6.4-1.7a11.8 11.8 0 0 0 5.5 1.4h.1c6.5 0 11.8-5.3 11.8-11.8 0-3.2-1.2-6.1-3.5-8.4ZM12.2 21.7c-1.7 0-3.5-.5-5-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.8 9.8 0 1 1 8.4 4.7Zm5.4-7.3c-.3-.1-1.7-.8-2-1-.3-.1-.5-.1-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1a8 8 0 0 1-2.3-1.4 8.5 8.5 0 0 1-1.6-2c-.2-.3 0-.5.1-.6l.5-.6.3-.5c.1-.2 0-.4 0-.6l-.9-2.1c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.3 1.4 3.5c.2.2 2.4 3.7 5.9 5.2.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.3-.6-.4Z"/></svg>
-            Conversar no WhatsApp
-          </a>
-          <a class="action action--secondary" id="vcard-cta" href="./joao-barreto.vcf" download>
-            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 12a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Zm0 2c-4.4 0-8 2.2-8 5v2h11.1a6.5 6.5 0 0 1-.1-1c0-2.4 1.3-4.5 3.2-5.6A15 15 0 0 0 12 14Zm8 2v3h3v2h-3v3h-2v-3h-3v-2h3v-3h2Z"/></svg>
-            Salvar contacto
-          </a>
-        </div>
-
-        <button class="share-action" id="share-profile" type="button">
-          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M18 16a3 3 0 0 0-2.4 1.2l-6.7-3.8a3.4 3.4 0 0 0 0-2.8l6.7-3.8A3 3 0 1 0 15 5c0 .2 0 .4.1.6L8.4 9.4a3 3 0 1 0 0 5.2l6.7 3.8A3 3 0 1 0 18 16Z"/></svg>
-          Compartilhar perfil
-        </button>
-        <p class="feedback" id="share-feedback" role="status" aria-live="polite"></p>
+    <section class="content-section" aria-labelledby="principles-title">
+      <div class="section-heading"><h2 id="principles-title">Como construo</h2></div>
+      <div class="principles-grid">
+        <article class="principle"><h3>Começa no trabalho real</h3><p>O problema vem antes da tecnologia. Primeiro observo onde há repetição, demora ou margem para erro.</p></article>
+        <article class="principle"><h3>Automação com travas</h3><p>Ações sensíveis não desaparecem numa caixa-preta. Validação e aprovação humana fazem parte do produto.</p></article>
+        <article class="principle"><h3>Evolução documentada</h3><p>Versões, decisões e próximos passos ficam visíveis para que cada melhoria tenha contexto.</p></article>
       </div>
     </section>
 
-    <section class="contact-section" aria-labelledby="contact-title">
-      <div class="section-intro">
-        <h2 id="contact-title">Encontre-me online</h2>
-        <p>Contacto direto e presença digital, sem intermediários.</p>
-      </div>
-      <div class="contact-links">
-        <a id="instagram-link" href="https://www.instagram.com/jaobm_/" target="_blank" rel="me noopener noreferrer" aria-label="Instagram de João Barreto, abre numa nova janela">
-          <span class="contact-links__icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2Zm-.2 2A3.6 3.6 0 0 0 4 7.6v8.8A3.6 3.6 0 0 0 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6A3.6 3.6 0 0 0 16.4 4H7.6Zm9.1 1.5a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></svg></span>
-          <span><strong>Instagram</strong><small>@jaobm_</small></span>
-          <span class="external-glyph" aria-hidden="true">↗</span>
-        </a>
-        <a id="github-link" href="https://github.com/Barretomen" target="_blank" rel="me noopener noreferrer" aria-label="GitHub de João Barreto, abre numa nova janela">
-          <span class="contact-links__icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 .8a11.4 11.4 0 0 0-3.6 22.2v-2.7c-2.9.6-3.5-1.2-3.5-1.2-.5-1.2-1.2-1.5-1.2-1.5-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 1.7 2.6 1.2 3 .9.1-.7.4-1.2.7-1.5-2.3-.3-4.8-1.2-4.8-5.6 0-1.2.4-2.2 1.1-3-.1-.3-.5-1.4.1-3 0 0 .9-.3 3.1 1.1a10.7 10.7 0 0 1 5.6 0c2.1-1.4 3-1.1 3-1.1.6 1.6.2 2.7.1 3 .7.8 1.1 1.8 1.1 3 0 4.4-2.5 5.3-4.8 5.6.4.3.7 1 .7 2v4.5A11.4 11.4 0 0 0 12 .8Z"/></svg></span>
-          <span><strong>GitHub</strong><small>@Barretomen</small></span>
-          <span class="external-glyph" aria-hidden="true">↗</span>
-        </a>
-        <a id="linkedin-link" href="https://www.linkedin.com/in/barretomendes/" target="_blank" rel="me noopener noreferrer" aria-label="LinkedIn de João Barreto, abre numa nova janela">
-          <span class="contact-links__icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5.3 7.9H1.7V22h3.6V7.9ZM3.5 2A2.1 2.1 0 1 0 3.5 6.2 2.1 2.1 0 0 0 3.5 2ZM22 13.9c0-4.2-2.2-6.2-5.2-6.2-2.4 0-3.5 1.3-4.1 2.3V7.9H9.1V22h3.6v-7c0-1.8.4-3.6 2.7-3.6s2.9 2.1 2.9 3.7V22H22v-8.1Z"/></svg></span>
-          <span><strong>LinkedIn</strong><small>barretomendes</small></span>
-          <span class="external-glyph" aria-hidden="true">↗</span>
-        </a>
-        <a id="email-link" href="mailto:imjoaobarreto@gmail.com" aria-label="Enviar email para João Barreto">
-          <span class="contact-links__icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M2 4h20v16H2V4Zm10 8.7L19.5 6h-15l7.5 6.7Zm0 2.7L4 8.2V18h16V8.2l-8 7.2Z"/></svg></span>
-          <span><strong>Email</strong><small>imjoaobarreto@gmail.com</small></span>
-          <span class="external-glyph" aria-hidden="true">↗</span>
-        </a>
-      </div>
-    </section>
-
-    <section class="projects-section" aria-labelledby="projects-title">
-      <div class="section-intro">
-        <h2 id="projects-title">Projetos selecionados</h2>
-        <p>Soluções reais, construídas para resolver rotinas concretas.</p>
-      </div>
-      <div class="project-list" id="project-list"></div>
-    </section>
-
-    <div class="lower-grid">
-      <section class="github-section" aria-labelledby="github-title">
-        <div class="section-intro section-intro--compact">
-          <h2 id="github-title">Atividade recente no GitHub</h2>
-          <p id="github-status">A carregar repositórios públicos…</p>
-        </div>
-        <div class="repo-list" id="repo-list" aria-live="polite"></div>
-        <a class="text-link" href="https://github.com/Barretomen?tab=repositories" target="_blank" rel="noopener noreferrer">Ver todos os repositórios <span aria-hidden="true">↗</span></a>
-      </section>
-
-      <section class="now-section" aria-labelledby="now-title">
-        <div class="now-section__header">
-          <span class="now-pulse" aria-hidden="true"></span>
-          <h2 id="now-title">Agora</h2>
-        </div>
-        <p>Construindo</p>
-        <strong id="now-building">João Digital Hub</strong>
-        <ul class="interest-list" id="interest-list" aria-label="Tecnologias e interesses"></ul>
-      </section>
-    </div>
-
-    <section class="cv-section" id="cv-section" hidden aria-labelledby="cv-title">
-      <h2 id="cv-title">Currículo</h2>
-      <a class="action action--secondary" id="cv-link" href="#">Abrir currículo</a>
+    <section class="content-section now-grid" aria-label="Trabalho atual e contacto">
+      <article class="now-panel">
+        <h2>Agora</h2>
+        <p id="now-note">Consolidando automações maduras em um produto desktop mais leve e sustentável.</p>
+        <p><strong id="now-building">Operations Command Assistant</strong></p>
+        <a class="case-card__link" href="/hub/now/">Ver o foco atual</a>
+      </article>
+      <article class="now-panel">
+        <h2>Tem um fluxo repetitivo?</h2>
+        <p>Posso ajudar a transformar passos manuais numa ferramenta clara, segura e sustentável.</p>
+        <a class="case-card__link" href="/hub/contact/">Entrar em contacto</a>
+      </article>
     </section>
   </main>
 
-  <footer>
-    <img src="/assets/wallet/joao_barreto_wallet_logo.svg" alt="" width="38" height="38" loading="lazy">
-    <p>Um ponto permanente para tudo o que estou construindo.</p>
-    <p class="footer-meta">João Barreto · <span id="current-year"></span></p>
+  <footer class="portfolio-footer">
+    <p>João Barreto · <span data-current-year></span></p>
+    <a href="/hub/projects/">Ver todos os projetos</a>
   </footer>
-
-  <noscript>
-    <div class="noscript-note">O perfil continua acessível, mas os projetos dinâmicos e o compartilhamento precisam de JavaScript.</div>
-  </noscript>
-
   <script src="./config.js"></script>
   <script src="./app.js" defer></script>
 </body>

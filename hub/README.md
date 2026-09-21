@@ -14,8 +14,13 @@ Google Wallet / QR
 ```text
 hub/
 ├─ index.html              Página e metadata
+├─ projects/index.html     Arquivo dos nove cases e roadmaps
+├─ about/index.html        Apresentação e princípios de trabalho
+├─ now/index.html          Foco atual e próximos passos
+├─ contact/index.html      Contactos e atividade pública
 ├─ styles.css              Sistema visual responsivo
 ├─ english-theme.css       Tema alinhado ao Barreto English
+├─ portfolio.css           Layout editorial multipágina e roadmaps
 ├─ app.js                  UI, compartilhar e GitHub dinâmico
 ├─ config.js               Dados e feature toggles centralizados
 ├─ joao-barreto.vcf        Contacto vCard 3.0
@@ -32,15 +37,15 @@ O projeto usa apenas HTML, CSS e JavaScript nativos. Não há build, cookies, an
 
 ## Página `/hub/`
 
-A página é mobile-first e prioriza:
+A experiência é mobile-first e está dividida em páginas reais:
 
-- WhatsApp;
-- salvar contacto;
-- compartilhar/copiar perfil;
-- Instagram, GitHub, LinkedIn e email;
-- projetos selecionados;
-- repositórios públicos recentes;
-- seção curta “Agora”.
+- `/hub/`: apresentação e projetos em destaque;
+- `/hub/projects/`: nove cases com filtros, estado e roadmap;
+- `/hub/about/`: perfil e princípios de trabalho;
+- `/hub/now/`: foco atual, exploração e próximas decisões;
+- `/hub/contact/`: canais diretos, redes, GitHub e compartilhamento.
+
+Projetos corporativos são apresentados como cases sanitizados. O conteúdo público não inclui endpoints, IDs, clientes, credenciais ou detalhes internos de operação.
 
 Os dados usados pela interface estão em `config.js`. Metadata e JSON-LD permanecem no HTML porque crawlers não devem depender da execução de JavaScript.
 
@@ -50,7 +55,7 @@ Edite `hub/config.js`:
 
 - `profile`: nome, tagline, telefone, email e assets;
 - `urls`: WhatsApp, redes, vCard e CV;
-- `projects`: projetos selecionados;
+- `projects`: cases, tecnologias, estado e etapas dos roadmaps;
 - `now`: projeto atual e interesses;
 - `github`: utilizador, exclusões e fallback;
 - `features`: recursos que podem ser ativados ou desativados.

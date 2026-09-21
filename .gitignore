@@ -4,3 +4,4 @@
 *service-account*.json
 *service_account*.json
 hub/wallet/private*
+.artifacts/
