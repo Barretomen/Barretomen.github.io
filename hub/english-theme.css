@@ -1,0 +1,423 @@
+/*
+  João Hub — Barreto English visual family
+  Same editorial system: ice-blue canvas, navy structure, royal blue content,
+  red signal actions and a restrained yellow focus accent.
+*/
+
+:root {
+  --ink: #f3f7fb;
+  --ink-raised: #ffffff;
+  --ink-soft: #e8f0f8;
+  --cyan: #1457d9;
+  --cyan-bright: #1457d9;
+  --paper: #0a2136;
+  --muted: #526b80;
+  --line: #c4d2de;
+  --line-strong: #8ca5b9;
+  --focus: #f2c84b;
+  --signal: #ef4438;
+  --sun: #f2c84b;
+  --sky: #dceaff;
+  --navy: #0a2136;
+  --font: "Source Sans 3", sans-serif;
+  --display: "Familjen Grotesk", sans-serif;
+  --mono: "IBM Plex Mono", monospace;
+  --radius-small: 0.5rem;
+  --radius-medium: 0.5rem;
+}
+
+html {
+  background: var(--ink);
+}
+
+body {
+  color: var(--paper);
+  background:
+    linear-gradient(90deg, rgba(10, 33, 54, 0.035) 1px, transparent 1px),
+    linear-gradient(rgba(10, 33, 54, 0.025) 1px, transparent 1px),
+    var(--ink);
+  background-size: 80px 80px;
+  font-size: 1.0625rem;
+}
+
+.skip-link {
+  color: var(--navy);
+  background: var(--sun);
+  border-radius: 0.25rem;
+}
+
+.signal-field__path {
+  stroke: rgba(20, 87, 217, 0.13);
+}
+
+.signal-field__echo {
+  stroke: rgba(239, 68, 56, 0.08);
+}
+
+.site-header {
+  min-height: 4.65rem;
+  border-bottom-color: var(--line);
+}
+
+.brand-chip {
+  color: var(--navy);
+  font-family: var(--display);
+  font-size: 1.08rem;
+  letter-spacing: -0.04em;
+}
+
+.brand-chip__mark {
+  width: 2.5rem;
+  border: 1px solid var(--navy);
+  border-radius: 0.3rem 0.85rem 0.3rem 0.3rem;
+  background: #fff;
+  box-shadow: 0.28rem 0.28rem 0 var(--sun);
+}
+
+.brand-chip__mark img {
+  width: 1.95rem;
+  height: 1.95rem;
+}
+
+.brand-chip__name > span {
+  color: var(--signal);
+}
+
+.permanent-address {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.65rem;
+}
+
+.hero {
+  position: relative;
+  margin-top: 1.5rem;
+  padding: 3.5rem 1.25rem 3.25rem;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(108deg, transparent 0 68%, rgba(20, 87, 217, 0.075) 68% 100%),
+    linear-gradient(180deg, #f9fcff 0%, #edf4fa 100%);
+  overflow: hidden;
+}
+
+.hero::after {
+  content: "JB / HUB";
+  position: absolute;
+  z-index: 0;
+  right: -1rem;
+  bottom: -1.5rem;
+  color: rgba(20, 87, 217, 0.055);
+  font: 700 clamp(4.5rem, 18vw, 12rem)/0.8 var(--display);
+  letter-spacing: -0.08em;
+  white-space: nowrap;
+}
+
+.hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+.portrait-shell {
+  padding: 0.28rem;
+  border: 2px solid var(--navy);
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0.65rem 0.65rem 0 var(--sky);
+}
+
+.portrait-shell::before {
+  inset: -0.5rem;
+  border-color: rgba(20, 87, 217, 0.22);
+}
+
+.portrait-shell__signal {
+  border-color: #fff;
+  background: var(--signal);
+}
+
+.availability {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+}
+
+.availability span {
+  border-radius: 0;
+  background: var(--signal);
+  box-shadow: none;
+  transform: rotate(45deg);
+}
+
+.hero__role {
+  width: fit-content;
+  margin-bottom: 1.25rem;
+  padding: 0.42rem 0.65rem;
+  color: var(--navy);
+  border: 1px solid var(--navy);
+  background: #fff;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.hero__role::before {
+  content: "";
+  display: inline-block;
+  width: 0.45rem;
+  height: 0.45rem;
+  margin-right: 0.55rem;
+  background: var(--signal);
+  transform: rotate(45deg);
+}
+
+.hero h1 {
+  color: var(--navy);
+  font-size: clamp(4.4rem, 20vw, 7.8rem);
+  font-weight: 600;
+  line-height: 0.82;
+  letter-spacing: -0.07em;
+}
+
+.hero h1 span {
+  color: var(--cyan);
+  font-weight: 700;
+}
+
+.hero__statement {
+  color: #425e74;
+}
+
+.action {
+  border-radius: var(--radius-small);
+  font-size: 0.94rem;
+}
+
+.action--primary {
+  color: #fff;
+  background: #c82f27;
+}
+
+.action--primary:hover {
+  background: #a92721;
+}
+
+.action--secondary {
+  color: var(--navy);
+  border-color: var(--navy);
+  background: transparent;
+}
+
+.action--secondary:hover {
+  color: #fff;
+  border-color: var(--navy);
+  background: var(--navy);
+}
+
+.share-action {
+  color: var(--muted);
+}
+
+.share-action:hover {
+  color: var(--accent, #1457d9);
+}
+
+.feedback {
+  color: var(--signal);
+}
+
+.section-intro h2,
+.now-section h2,
+.cv-section h2 {
+  color: var(--navy);
+  font-weight: 600;
+}
+
+.section-intro p {
+  color: var(--muted);
+}
+
+.contact-section,
+.projects-section,
+.github-section {
+  color: var(--navy);
+}
+
+.contact-links {
+  border: 1px solid var(--navy);
+  border-bottom: 0;
+  background: #fff;
+}
+
+.contact-links > a {
+  padding-inline: 0.85rem;
+  border-bottom-color: var(--navy);
+}
+
+.contact-links > a:hover,
+.contact-links > a:focus-visible {
+  padding-inline: 1.1rem;
+  border-bottom-color: var(--signal);
+  background: var(--sky);
+}
+
+.contact-links__icon {
+  color: #fff;
+  border: 0;
+  border-radius: 50%;
+  background: var(--cyan);
+}
+
+.contact-links strong {
+  color: var(--navy);
+}
+
+.contact-links small,
+.external-glyph {
+  color: var(--muted);
+}
+
+.project-list {
+  border: 1px solid var(--navy);
+  border-bottom: 0;
+  background: #fff;
+}
+
+.project-item {
+  padding-inline: 1rem;
+  border-bottom-color: var(--navy);
+}
+
+.project-item:nth-child(2) {
+  background: var(--sky);
+}
+
+.project-item::before {
+  height: 0.28rem;
+  background: var(--signal);
+}
+
+.project-item__category {
+  color: #a92822;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+}
+
+.project-item h3 {
+  color: var(--navy);
+}
+
+.project-item p {
+  color: var(--muted);
+}
+
+.project-item__open,
+.text-link {
+  color: var(--cyan);
+}
+
+.repo-list {
+  border: 1px solid var(--navy);
+  border-bottom: 0;
+  background: #fff;
+}
+
+.repo-item {
+  padding-inline: 1rem;
+  border-bottom-color: var(--navy);
+}
+
+.repo-item:hover,
+.repo-item:focus-visible {
+  background: var(--sky);
+}
+
+.repo-item h3 {
+  color: var(--navy);
+}
+
+.repo-item p,
+.repo-meta {
+  color: var(--muted);
+}
+
+.language-dot {
+  background: var(--signal);
+}
+
+.now-section {
+  padding: 1.8rem;
+  color: #fff;
+  border: 2px solid var(--navy);
+  border-left: 0.75rem solid var(--signal);
+  border-radius: 0.25rem 1.5rem 0.25rem 0.25rem;
+  background: var(--navy);
+  box-shadow: 0.7rem 0.7rem 0 var(--sun);
+}
+
+.now-section h2,
+.now-section > strong {
+  color: #fff;
+}
+
+.now-pulse {
+  border-radius: 0;
+  background: var(--sun);
+  box-shadow: none;
+  transform: rotate(45deg);
+}
+
+.now-section > p {
+  color: #a9c0d0;
+}
+
+.interest-list li {
+  color: #d5e4ed;
+  border-color: #54738a;
+  border-radius: 0.25rem;
+  font-family: var(--mono);
+  font-size: 0.64rem;
+}
+
+footer {
+  color: var(--muted);
+  border-top-color: var(--line-strong);
+}
+
+footer img {
+  border: 1px solid var(--navy);
+  border-radius: 0.25rem 0.7rem 0.25rem 0.25rem;
+  background: #fff;
+  box-shadow: 0.25rem 0.25rem 0 var(--sun);
+}
+
+.noscript-note {
+  color: #fff;
+  background: var(--navy);
+}
+
+@media (min-width: 50rem) {
+  .hero {
+    margin-top: 2rem;
+    padding-inline: clamp(2rem, 5vw, 4.5rem);
+    border-radius: 0.25rem 2rem 0.25rem 0.25rem;
+    box-shadow: 0.85rem 0.85rem 0 var(--sky);
+  }
+
+  .portrait-shell {
+    transform: rotate(-1deg);
+  }
+
+  .contact-links > a:nth-child(odd) {
+    border-right: 1px solid var(--navy);
+  }
+
+  .project-item {
+    padding-inline: 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portrait-shell {
+    transform: none;
+  }
+}
