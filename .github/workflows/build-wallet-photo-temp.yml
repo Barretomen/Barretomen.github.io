@@ -7,6 +7,7 @@ on:
       - '.github/workflows/build-wallet-photo-temp.yml'
       - 'assets/wallet/.photo_part_00.b64'
       - 'assets/wallet/.photo_part_01.b64'
+      - 'assets/wallet/.photo_part_01b.b64'
       - 'assets/wallet/.photo_part_02.b64'
 
 permissions:
@@ -19,7 +20,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Rebuild JPEG
         run: |
-          cat assets/wallet/.photo_part_00.b64 assets/wallet/.photo_part_01.b64 assets/wallet/.photo_part_02.b64 | base64 -d > assets/wallet/joao_barreto_wallet_photo.jpg
+          cat assets/wallet/.photo_part_00.b64 assets/wallet/.photo_part_01.b64 assets/wallet/.photo_part_01b.b64 assets/wallet/.photo_part_02.b64 | base64 -d > assets/wallet/joao_barreto_wallet_photo.jpg
           echo "size=$(stat -c%s assets/wallet/joao_barreto_wallet_photo.jpg)"
           test "$(stat -c%s assets/wallet/joao_barreto_wallet_photo.jpg)" -eq 22395
           file assets/wallet/joao_barreto_wallet_photo.jpg
