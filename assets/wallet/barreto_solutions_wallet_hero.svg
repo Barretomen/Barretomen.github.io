@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1032" height="336" viewBox="0 0 1032 336" role="img" aria-label="Barreto Solutions — identidade visual">
+  <defs>
+    <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M64 0H0V64" fill="none" stroke="#0A2136" stroke-opacity=".055"/>
+    </pattern>
+    <linearGradient id="bluePanel" x1="664" y1="18" x2="1010" y2="318" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#DCEAFF"/>
+      <stop offset="1" stop-color="#BFD7FF"/>
+    </linearGradient>
+    <linearGradient id="signal" x1="688" y1="107" x2="996" y2="246" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1457D9"/>
+      <stop offset="1" stop-color="#1ABDDD"/>
+    </linearGradient>
+    <clipPath id="panelClip">
+      <path d="M648 16H1016V320H600L700 168Z"/>
+    </clipPath>
+  </defs>
+
+  <rect width="1032" height="336" fill="#F3F7FB"/>
+  <rect width="1032" height="336" fill="url(#grid)"/>
+  <rect x="0" width="14" height="336" fill="#EF4438"/>
+  <rect x="31" y="28" width="13" height="13" fill="#F2C84B"/>
+
+  <g fill="#0A2136">
+    <text x="31" y="84" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" letter-spacing="1.2">BARRETO SOLUTIONS</text>
+    <rect x="31" y="105" width="80" height="5" fill="#1457D9"/>
+    <text x="31" y="174" font-family="Arial, Helvetica, sans-serif" font-size="44" font-weight="700">Apps, automações</text>
+    <text x="31" y="225" font-family="Arial, Helvetica, sans-serif" font-size="44" font-weight="700">e soluções digitais.</text>
+    <text x="31" y="285" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#526B80">João Barreto · Developer · Automation · Tech</text>
+  </g>
+
+  <path d="M648 16H1016V320H600L700 168Z" fill="url(#bluePanel)" stroke="#0A2136" stroke-width="2"/>
+  <g transform="translate(675 11) scale(.88)">
+    <g fill="#0A2136">
+      <path d="M49 36h98v50H99v108c0 25 11 36 34 36h18v50h-26c-52 0-80-30-80-84V86H49z"/>
+      <path fill-rule="evenodd" d="M124 36h88c64 0 99 30 99 78 0 31-16 53-45 65 35 12 54 37 54 72 0 53-41 81-108 81h-88v-51h84c31 0 47-13 47-38 0-24-16-37-47-37h-84v-51h80c29 0 44-11 44-33s-15-33-44-33h-80z"/>
+    </g>
+    <path d="M24 106C90 123 191 167 308 238" fill="none" stroke="#F3F7FB" stroke-width="35" stroke-linecap="round"/>
+    <path d="M24 106C90 123 191 167 308 238" fill="none" stroke="url(#signal)" stroke-width="23" stroke-linecap="round"/>
+  </g>
+
+  <path d="M715 301C809 244 891 257 1032 216" fill="none" stroke="#1ABDDD" stroke-width="3"/>
+  <rect x="978" y="278" width="38" height="38" fill="#EF4438"/>
+</svg>

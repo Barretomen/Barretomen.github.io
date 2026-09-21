@@ -14,8 +14,8 @@ var JOAO_HUB_WALLET = Object.freeze({
   tokenUrl: "https://oauth2.googleapis.com/token",
   scope: "https://www.googleapis.com/auth/wallet_object.issuer",
   propertyName: "WALLET_SERVICE_ACCOUNT_JSON_B64",
-  photoUrl: "https://raw.githubusercontent.com/Barretomen/Barretomen.github.io/main/assets/wallet/joao_barreto_wallet_photo.jpg",
-  heroUrl: "https://raw.githubusercontent.com/Barretomen/Barretomen.github.io/main/assets/wallet/joao_barreto_wallet_hero.png"
+  logoUrl: "https://raw.githubusercontent.com/Barretomen/Barretomen.github.io/main/assets/wallet/joao_barreto_wallet_logo.png",
+  heroUrl: "https://raw.githubusercontent.com/Barretomen/Barretomen.github.io/main/assets/wallet/barreto_solutions_wallet_hero.png"
 });
 
 function hubWalletStatus() {
@@ -130,12 +130,12 @@ function _hubWalletObjectResource() {
     classId: JOAO_HUB_WALLET.classId,
     state: "ACTIVE",
     genericType: "GENERIC_OTHER",
-    cardTitle: _hubWalletLocalized("Joao Barreto"),
-    subheader: _hubWalletLocalized("Digital Hub"),
-    header: _hubWalletLocalized("Projects • Social • Contact"),
-    logo: _hubWalletImage(JOAO_HUB_WALLET.photoUrl, "Photo of Joao Barreto"),
-    heroImage: _hubWalletImage(JOAO_HUB_WALLET.heroUrl, "Joao Barreto digital identity artwork"),
-    hexBackgroundColor: "#07111C",
+    cardTitle: _hubWalletLocalized("Barreto Solutions"),
+    subheader: _hubWalletLocalized("João Barreto"),
+    header: _hubWalletLocalized("Digital Hub"),
+    logo: _hubWalletImage(JOAO_HUB_WALLET.logoUrl, "Monograma JB da Barreto Solutions"),
+    heroImage: _hubWalletImage(JOAO_HUB_WALLET.heroUrl, "Identidade visual da Barreto Solutions"),
+    hexBackgroundColor: "#F3F7FB",
     barcode: {
       type: "QR_CODE",
       value: JOAO_HUB_WALLET.hubUrl,
@@ -144,8 +144,8 @@ function _hubWalletObjectResource() {
     textModulesData: [
       {
         id: "hub_intro",
-        header: "Explore my digital hub",
-        body: "Projects, social links and contact in one place."
+        header: "Construo soluções digitais",
+        body: "Apps, automações, projetos e contacto em um só lugar."
       }
     ],
     linksModuleData: {
