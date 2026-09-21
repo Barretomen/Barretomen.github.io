@@ -48,15 +48,8 @@ window.JOAO_HUB_CONFIG = Object.freeze({
     username: "Barretomen",
     apiUrl: "https://api.github.com/users/Barretomen/repos?sort=updated&per_page=20",
     maxItems: 4,
-    exclude: ["Barretomen.github.io"],
+    exclude: ["Barretomen.github.io", "GordoRunner"],
     fallback: [
-      {
-        name: "GordoRunner",
-        description: "Jogo runner responsivo para navegador e celular.",
-        language: "JavaScript",
-        stars: 0,
-        url: "https://github.com/Barretomen/GordoRunner"
-      },
       {
         name: "registo-cais",
         description: "Aplicação operacional para registo de cais.",
