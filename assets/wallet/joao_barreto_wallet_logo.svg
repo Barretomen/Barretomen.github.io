@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 340 340" role="img" aria-label="Monograma JB da Barreto Solutions">
+  <defs>
+    <linearGradient id="accent" x1="26" y1="105" x2="306" y2="238" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#18BBDD"/><stop offset="1" stop-color="#38D6EF"/>
+    </linearGradient>
+    <mask id="channel">
+      <rect width="340" height="340" fill="white"/>
+      <path d="M24 106C90 123 191 167 308 238" fill="none" stroke="black" stroke-width="47" stroke-linecap="round"/>
+    </mask>
+  </defs>
+  <g mask="url(#channel)" fill="#111820">
+    <path d="M49 36h98v50H99v108c0 25 11 36 34 36h18v50h-26c-52 0-80-30-80-84V86H49z"/>
+    <path fill-rule="evenodd" d="M124 36h88c64 0 99 30 99 78 0 31-16 53-45 65 35 12 54 37 54 72 0 53-41 81-108 81h-88v-51h84c31 0 47-13 47-38 0-24-16-37-47-37h-84v-51h80c29 0 44-11 44-33s-15-33-44-33h-80z"/>
+  </g>
+  <path d="M24 106C90 123 191 167 308 238" fill="none" stroke="url(#accent)" stroke-width="25" stroke-linecap="round"/>
+</svg>
