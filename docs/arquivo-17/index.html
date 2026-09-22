@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0d1117">
+  <meta name="description" content="Uma raspadinha com uma surpresa.">
+  <title>surpresa</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d1117'/%3E%3Cpath d='M32 10l4 15 15 4-15 4-4 15-4-15-15-4 15-4 4-15Z' fill='%2358a6ff'/%3E%3C/svg%3E">
+  <style>
+    :root { color-scheme: dark; --bg:#090c10; --panel:#0d1117; --panel-2:#161b22; --line:#30363d; --muted:#8b949e; --text:#e6edf3; --blue:#58a6ff; --cyan:#39d0d8; }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html, body { min-height: 100%; }
+    body { margin:0; min-height:100svh; overflow-x:hidden; background:radial-gradient(circle at 50% -20%,rgba(88,166,255,.15),transparent 40%),var(--bg); color:var(--text); font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; display:grid; place-items:center; padding:max(16px,env(safe-area-inset-top)) 14px max(16px,env(safe-area-inset-bottom)); }
+    .app { width:min(100%,720px); min-height:min(690px,calc(100svh - 32px)); display:grid; grid-template-columns:52px 1fr; grid-template-rows:38px 1fr 24px; overflow:hidden; background:var(--panel); border:1px solid var(--line); border-radius:12px; box-shadow:0 28px 90px rgba(0,0,0,.48); }
+    .titlebar { grid-column:1/-1; display:grid; grid-template-columns:84px 1fr 84px; align-items:center; min-width:0; background:#11161d; border-bottom:1px solid var(--line); color:var(--muted); font-size:.76rem; }
+    .traffic { display:flex; gap:7px; padding-left:14px; }
+    .traffic i { width:9px; height:9px; border-radius:50%; background:#3a424c; }
+    .traffic i:first-child { background:#e06c75; }
+    .traffic i:nth-child(2) { background:#d19a66; }
+    .traffic i:last-child { background:#58a6ff; }
+    .window-title { overflow:hidden; text-align:center; text-overflow:ellipsis; white-space:nowrap; }
+    .rail { grid-row:2; display:flex; flex-direction:column; align-items:center; gap:18px; padding-top:16px; background:#0b0f14; border-right:1px solid var(--line); color:#626b76; }
+    .rail-icon { width:22px; height:22px; display:grid; place-items:center; font:700 1rem/1 ui-monospace,monospace; }
+    .rail-icon.active { color:var(--text); position:relative; }
+    .rail-icon.active::before { content:""; position:absolute; left:-15px; width:2px; height:28px; background:var(--blue); }
+    .workspace { grid-row:2; min-width:0; display:grid; grid-template-rows:38px 1fr; }
+    .tabs { display:flex; border-bottom:1px solid var(--line); background:#0b0f14; }
+    .tab { min-width:150px; display:flex; align-items:center; gap:8px; padding:0 14px; border-right:1px solid var(--line); border-top:1px solid var(--blue); background:var(--panel); color:#c9d1d9; font-size:.8rem; }
+    .tab-dot { width:7px; height:7px; border-radius:2px; background:var(--blue); }
+    .content { min-width:0; display:grid; place-items:center; padding:34px clamp(18px,6vw,54px); background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px); background-size:28px 28px; }
+    .game { width:min(100%,480px); }
+    .kicker { margin:0 0 10px; color:var(--blue); font:700 .72rem/1.2 ui-monospace,SFMono-Regular,Consolas,monospace; letter-spacing:.14em; text-transform:uppercase; }
+    h1 { margin:0; color:var(--text); font-size:clamp(1.65rem,6vw,2.65rem); line-height:1.05; letter-spacing:-.045em; font-weight:720; }
+    .lead { margin:10px 0 24px; color:var(--muted); font-size:.95rem; line-height:1.5; }
+    .scratch-wrap { position:relative; aspect-ratio:1.75/1; overflow:hidden; border:1px solid #3d444d; border-radius:8px; background:linear-gradient(135deg,#111820,#0c2931); box-shadow:0 14px 45px rgba(0,0,0,.3); isolation:isolate; }
+    .message { position:absolute; inset:0; display:grid; place-items:center; padding:20px; text-align:center; }
+    .tiny { display:block; margin-bottom:10px; color:var(--muted); font:700 .7rem/1.2 ui-monospace,SFMono-Regular,Consolas,monospace; letter-spacing:.13em; text-transform:uppercase; }
+    .reveal-text { display:block; color:#f0f6fc; font-size:clamp(2rem,9vw,3.8rem); font-weight:780; line-height:.92; letter-spacing:-.075em; }
+    .cursor { display:inline-block; width:.12em; height:.75em; margin-left:.08em; background:var(--cyan); vertical-align:-.02em; animation:blink 1s steps(1) infinite; }
+    canvas { position:absolute; inset:0; width:100%; height:100%; z-index:2; cursor:crosshair; touch-action:none; transition:opacity .42s ease; }
+    .revealed canvas { opacity:0; pointer-events:none; }
+    .controls { display:flex; align-items:center; justify-content:space-between; gap:14px; margin-top:14px; }
+    .hint { margin:0; color:var(--muted); font-size:.82rem; line-height:1.4; }
+    .reveal-button { flex:0 0 auto; padding:8px 11px; color:#c9d1d9; background:var(--panel-2); border:1px solid var(--line); border-radius:6px; font:650 .75rem/1 system-ui,sans-serif; cursor:pointer; }
+    .reveal-button:hover { border-color:var(--blue); color:#fff; }
+    .reveal-button:focus-visible { outline:2px solid var(--blue); outline-offset:2px; }
+    .celebration { min-height:21px; margin:20px 0 0; color:var(--cyan); font:650 .83rem/1.4 ui-monospace,SFMono-Regular,Consolas,monospace; opacity:0; transform:translateY(5px); transition:.35s ease; }
+    .celebration.show { opacity:1; transform:translateY(0); }
+    .statusbar { grid-column:1/-1; display:flex; align-items:center; justify-content:space-between; padding:0 10px; background:#0969da; color:white; font-size:.67rem; letter-spacing:.02em; }
+    .confetti { position:fixed; top:-18px; z-index:10; width:7px; height:13px; pointer-events:none; animation:fall var(--duration) linear forwards; }
+    @keyframes blink { 50% { opacity:0; } }
+    @keyframes fall { to { transform:translate3d(var(--drift),110vh,0) rotate(760deg); opacity:.3; } }
+    @media (max-width:540px) { body { padding:0; place-items:stretch; } .app { width:100%; min-height:100svh; border:0; border-radius:0; grid-template-columns:44px 1fr; } .content { padding:28px 18px; align-items:center; } .titlebar { grid-template-columns:76px 1fr 76px; } .scratch-wrap { aspect-ratio:1.48/1; } .controls { align-items:flex-start; flex-direction:column; } .reveal-button { align-self:stretch; min-height:42px; } .rail-icon.active::before { left:-11px; } }
+    .lock-screen { position:fixed; inset:0; z-index:100; display:grid; place-items:center; padding:20px; background:rgba(9,12,16,.92); backdrop-filter:blur(14px); }
+    .lock-card { width:min(100%,360px); padding:28px; background:#0d1117; border:1px solid var(--line); border-radius:10px; box-shadow:0 30px 90px rgba(0,0,0,.55); }
+    .lock-symbol { width:38px; height:38px; display:grid; place-items:center; margin-bottom:20px; color:var(--blue); background:rgba(88,166,255,.1); border:1px solid rgba(88,166,255,.35); border-radius:7px; font:700 1.1rem/1 ui-monospace,monospace; }
+    .lock-card h2 { margin:0 0 8px; font-size:1.35rem; letter-spacing:-.025em; }
+    .lock-card p { margin:0 0 20px; color:var(--muted); font-size:.88rem; line-height:1.5; }
+    .code-form { display:grid; gap:10px; }
+    .code-input { width:100%; height:48px; padding:0 14px; color:var(--text); background:#090c10; border:1px solid var(--line); border-radius:6px; outline:none; font:700 1.25rem/1 ui-monospace,monospace; letter-spacing:.35em; text-align:center; }
+    .code-input:focus { border-color:var(--blue); box-shadow:0 0 0 3px rgba(88,166,255,.12); }
+    .unlock-button { height:44px; color:#fff; background:#0969da; border:0; border-radius:6px; font:650 .86rem/1 system-ui,sans-serif; cursor:pointer; }
+    .unlock-button:hover { background:#1677e8; }
+    .code-error { min-height:18px; margin:2px 0 0 !important; color:#ff7b72 !important; font-size:.78rem !important; }
+    body.locked .app { filter:blur(10px); pointer-events:none; user-select:none; }
+    .lock-screen.unlocked { opacity:0; pointer-events:none; transition:opacity .3s ease; }
+    @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; } }
+  </style>
+</head>
+<body class="locked">
+  <section class="lock-screen" id="lockScreen" aria-labelledby="lockTitle">
+    <div class="lock-card">
+      <div class="lock-symbol" aria-hidden="true">▣</div>
+      <h2 id="lockTitle">Acesso restrito</h2>
+      <p>Insere o código de 4 dígitos para abrir a surpresa.</p>
+      <form class="code-form" id="codeForm">
+        <input class="code-input" id="codeInput" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" aria-label="Código de acesso" autofocus>
+        <button class="unlock-button" type="submit">desbloquear</button>
+        <p class="code-error" id="codeError" role="alert"></p>
+      </form>
+    </div>
+  </section>
+  <main class="app">
+    <header class="titlebar" aria-label="Barra da janela"><span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span><span class="window-title">surpresa — visualizador</span><span></span></header>
+    <aside class="rail" aria-label="Navegação decorativa"><span class="rail-icon active" aria-hidden="true">◇</span><span class="rail-icon" aria-hidden="true">⌕</span><span class="rail-icon" aria-hidden="true">◫</span></aside>
+    <section class="workspace">
+      <div class="tabs" aria-hidden="true"><div class="tab"><span class="tab-dot"></span> surpresa</div></div>
+      <div class="content">
+        <div class="game">
+          <p class="kicker">mensagem bloqueada</p>
+          <h1>Tem uma verdade escondida aqui.</h1>
+          <p class="lead">Arrasta o dedo sobre o cartão para desbloquear.</p>
+          <div class="scratch-wrap" id="scratchWrap">
+            <div class="message" aria-live="polite"><div><span class="tiny">resultado confirmado</span><span class="reveal-text">Tu é gata<br>em fia<span class="cursor" aria-hidden="true"></span></span></div></div>
+            <canvas id="scratch" aria-label="Área para raspar. Deslize o dedo sobre ela para revelar a mensagem."></canvas>
+          </div>
+          <div class="controls"><p class="hint" id="hint">Use o dedo ou o cursor para raspar.</p><button class="reveal-button" id="revealButton" type="button">revelar direto</button></div>
+          <p class="celebration" id="celebration" role="status">✓ informação verificada com sucesso</p>
+        </div>
+      </div>
+    </section>
+    <footer class="statusbar"><span>pronto</span><span>surpresa 1/1</span></footer>
+  </main>
+  <script>
+    const lockScreen=document.querySelector('#lockScreen'); const codeForm=document.querySelector('#codeForm'); const codeInput=document.querySelector('#codeInput'); const codeError=document.querySelector('#codeError');
+    codeForm.addEventListener('submit',async event=>{ event.preventDefault(); const bytes=new TextEncoder().encode(codeInput.value); const digest=await crypto.subtle.digest('SHA-256',bytes); const hash=Array.from(new Uint8Array(digest),byte=>byte.toString(16).padStart(2,'0')).join(''); if(hash==='7e90ad89ef368608c15aea68c11b5c55bc653719cb61450c5a6f9f021ed11870'){ document.body.classList.remove('locked'); lockScreen.classList.add('unlocked'); codeError.textContent=''; setTimeout(()=>{lockScreen.hidden=true;paintCover();},320); }else{ codeError.textContent='Código incorreto. Tenta novamente.'; codeInput.value=''; codeInput.focus(); } });
+    codeInput.addEventListener('input',()=>{ codeInput.value=codeInput.value.replace(/\D/g,'').slice(0,4); codeError.textContent=''; });
+    const canvas=document.querySelector('#scratch'); const wrap=document.querySelector('#scratchWrap'); const hint=document.querySelector('#hint'); const revealButton=document.querySelector('#revealButton'); const celebration=document.querySelector('#celebration'); const ctx=canvas.getContext('2d',{willReadFrequently:true}); let drawing=false; let revealed=false; let moves=0;
+    function paintCover(){ const rect=wrap.getBoundingClientRect(); const scale=Math.min(window.devicePixelRatio||1,2); canvas.width=Math.round(rect.width*scale); canvas.height=Math.round(rect.height*scale); ctx.setTransform(scale,0,0,scale,0,0); const gradient=ctx.createLinearGradient(0,0,rect.width,rect.height); gradient.addColorStop(0,'#30363d'); gradient.addColorStop(.48,'#59616b'); gradient.addColorStop(1,'#252b32'); ctx.fillStyle=gradient; ctx.fillRect(0,0,rect.width,rect.height); ctx.globalAlpha=.12; ctx.strokeStyle='#ffffff'; ctx.lineWidth=1; for(let x=-rect.height;x<rect.width;x+=16){ctx.beginPath();ctx.moveTo(x,rect.height);ctx.lineTo(x+rect.height,0);ctx.stroke();} ctx.globalAlpha=1; ctx.fillStyle='#f0f6fc'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.font=`650 ${Math.max(15,rect.width/24)}px system-ui, sans-serif`; ctx.fillText('ARRASTE PARA REVELAR',rect.width/2,rect.height/2-7); ctx.fillStyle='#c0c7d0'; ctx.font=`500 ${Math.max(11,rect.width/36)}px system-ui, sans-serif`; ctx.fillText('status: bloqueado',rect.width/2,rect.height/2+22); ctx.globalCompositeOperation='destination-out'; }
+    function point(event){const rect=canvas.getBoundingClientRect();return{x:event.clientX-rect.left,y:event.clientY-rect.top};}
+    function scratch(event){if(!drawing||revealed)return;event.preventDefault();const p=point(event);const radius=Math.max(22,canvas.clientWidth*.065);ctx.beginPath();ctx.arc(p.x,p.y,radius,0,Math.PI*2);ctx.fill();moves+=1;if(moves%8===0)checkProgress();}
+    function checkProgress(){const pixels=ctx.getImageData(0,0,canvas.width,canvas.height).data;let clear=0;for(let i=3;i<pixels.length;i+=40)if(pixels[i]<50)clear++;if(clear/(pixels.length/40)>.48)reveal();}
+    function reveal(){if(revealed)return;revealed=true;wrap.classList.add('revealed');hint.textContent='Mensagem desbloqueada.';revealButton.hidden=true;celebration.classList.add('show');confetti();}
+    function confetti(){const colors=['#58a6ff','#39d0d8','#e6edf3','#7ee787'];for(let i=0;i<38;i++){const piece=document.createElement('i');piece.className='confetti';piece.style.left=`${Math.random()*100}vw`;piece.style.background=colors[i%colors.length];piece.style.setProperty('--drift',`${(Math.random()-.5)*220}px`);piece.style.setProperty('--duration',`${1.8+Math.random()*1.5}s`);piece.style.animationDelay=`${Math.random()*.25}s`;document.body.appendChild(piece);setTimeout(()=>piece.remove(),3800);}}
+    canvas.addEventListener('pointerdown',event=>{drawing=true;canvas.setPointerCapture(event.pointerId);scratch(event);}); canvas.addEventListener('pointermove',scratch); canvas.addEventListener('pointerup',()=>{drawing=false;checkProgress();}); canvas.addEventListener('pointercancel',()=>{drawing=false;}); revealButton.addEventListener('click',reveal);
+    paintCover(); let resizeTimer; window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{if(!revealed)paintCover();},180);});
+  </script>
+</body>
+</html>
