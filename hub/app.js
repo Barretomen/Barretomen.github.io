@@ -45,7 +45,7 @@
     }
 
     article.id = project.id;
-    article.setAttribute("aria-labelledby", title.id);
+    article.setAttribute("aria-labelledby", "title-" + project.id);
     var body = document.createElement("div");
     body.className = "case-card__body";
     var description = document.createElement("p");
@@ -86,10 +86,50 @@
     var list = $("#featured-projects");
     if (!list) return;
     var fragment = document.createDocumentFragment();
-    config.projects.filter(function (project) { return project.featured; }).forEach(function (project) {
-      fragment.append(projectCard(project, true));
+    var projects = config.projects.filter(function (project) { return project.featured; });
+    projects.forEach(function (project, index) {
+      fragment.append(list.hasAttribute("data-project-story") ? projectStory(project, index, projects.length) : projectCard(project, true));
     });
     list.replaceChildren(fragment);
+  }
+
+  function projectStory(project, index, total) {
+    function element(tag, className, text) {
+      var node = document.createElement(tag);
+      if (className) node.className = className;
+      if (text) node.textContent = text;
+      return node;
+    }
+    var panel = element("article", "project-panel");
+    panel.setAttribute("aria-labelledby", "featured-" + project.id);
+    var copy = element("div", "project-copy");
+    var meta = element("div", "project-meta");
+    meta.append(element("span", "project-number", String(index + 1).padStart(2, "0") + " / " + String(total).padStart(2, "0")), element("span", "project-status", project.categoryLabel + " / " + project.status));
+    var title = element("h3", "", project.name);
+    title.id = "featured-" + project.id;
+    var tech = element("ul", "project-tech");
+    tech.setAttribute("aria-label", "Tecnologias");
+    project.technologies.forEach(function (item) { tech.append(element("li", "", item)); });
+    var link = element("a", "inline-link", "Explorar o case");
+    link.href = "/hub/projects/#" + project.id;
+    link.setAttribute("aria-label", "Explorar o case " + project.name);
+    var arrow = element("span", "", "↗");
+    arrow.setAttribute("aria-hidden", "true");
+    link.append(arrow);
+    copy.append(meta, title, element("p", "project-lede", project.lede), tech, link);
+    var visual = element("div", "project-visual");
+    visual.append(element("p", "", "Evolução do projeto"));
+    var steps = element("ol");
+    project.roadmap.slice(0, 4).forEach(function (step) {
+      var item = element("li");
+      item.dataset.state = step.state;
+      var labels = { done: "Concluído", current: "Em andamento", planned: "Planejado" };
+      item.append(element("strong", "", step.title), element("small", "", labels[step.state] + " — " + step.detail));
+      steps.append(item);
+    });
+    visual.append(steps);
+    panel.append(copy, visual);
+    return panel;
   }
 
   function renderProjects() {
@@ -118,6 +158,11 @@
     var building = $("#now-building");
     var note = $("#now-note");
     var list = $("#interest-list");
+    var updated = $("#now-updated");
+    if (updated && config.now.updated) {
+      updated.dateTime = config.now.updated;
+      updated.textContent = new Intl.DateTimeFormat("pt-PT", { month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(config.now.updated + "-01T00:00:00Z"));
+    }
     if (building) building.textContent = config.now.building;
     if (note) note.textContent = config.now.note;
     if (!list) return;

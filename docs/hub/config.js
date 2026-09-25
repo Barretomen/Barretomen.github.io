@@ -143,6 +143,7 @@ window.JOAO_HUB_CONFIG = Object.freeze({
     }
   ],
   now: {
+    updated: "2026-09",
     building: "Operations Command Assistant",
     note: "Consolidando automações maduras em um produto desktop mais leve e sustentável.",
     interests: ["Electron", "JavaScript", "C#", "Apps Script", "Automation"]

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#F3F7FB">
+  <meta name="theme-color" content="#07111c">
   <meta name="description" content="João Barreto constrói aplicações, automações e ferramentas digitais para problemas reais.">
   <link rel="canonical" href="https://barretomen.github.io/hub/">
   <meta property="og:title" content="João Barreto — Developer & Automation">
@@ -15,10 +15,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Source+Sans+3:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css">
-  <link rel="stylesheet" href="./english-theme.css">
-  <link rel="stylesheet" href="./portfolio.css">
+  <link rel="stylesheet" href="./home.css">
 </head>
-<body>
+<body class="home">
+  <div class="reading-progress" aria-hidden="true"><span></span></div>
   <a class="skip-link" href="#main-content">Saltar para o conteúdo</a>
   <header class="site-header">
     <a class="brand-chip" href="/hub/" aria-label="João Hub — início">
@@ -34,60 +34,69 @@
     </nav>
   </header>
 
-  <main class="page-main" id="main-content">
-    <section class="page-hero" aria-labelledby="home-title">
-      <div class="page-hero__copy">
-        <p class="page-kicker">João Barreto · Portugal</p>
-        <h1 id="home-title">Sistemas pequenos. Impacto concreto.</h1>
-        <p class="page-hero__statement">Construo aplicações e automações para retirar passos repetitivos, ligar ferramentas e deixar decisões importantes sob controlo humano.</p>
-        <div class="hero-actions">
-          <a class="button button--red" href="/hub/projects/">Explorar projetos</a>
-          <a class="button button--light" id="whatsapp-cta" href="https://wa.me/351921176038" target="_blank" rel="noopener noreferrer">Conversar comigo</a>
-        </div>
+  <main id="main-content" tabindex="-1">
+    <section class="intro scene" aria-labelledby="home-title">
+      <div class="intro-meta"><p>João Barreto</p><p>Portugal / <span data-current-year>2026</span></p></div>
+      <div class="intro-copy">
+        <p class="discipline">Developer <span aria-hidden="true">/</span> Automation <span aria-hidden="true">/</span> Systems</p>
+        <h1 id="home-title"><span class="title-mask"><span>Sistemas pequenos.</span></span> <span class="title-mask"><span>Impacto concreto.</span></span></h1>
+        <div class="intro-detail"><span class="signal-line" aria-hidden="true"></span><p>Construo aplicações e automações para retirar passos repetitivos, ligar ferramentas e deixar decisões importantes sob controlo humano.</p></div>
+        <div class="intro-actions"><a class="inline-link" href="#work">Explorar projetos <span aria-hidden="true">↘</span></a><a class="quiet-link" id="whatsapp-cta" href="https://wa.me/351921176038" target="_blank" rel="noopener noreferrer">Conversar comigo <span aria-hidden="true">↗</span></a></div>
       </div>
-      <aside class="page-hero__aside">
-        <strong>Do script ao produto.</strong>
-        <p>Extensões, Apps Script, ferramentas web e aplicações desktop nascem do mesmo princípio: resolver o trabalho que realmente acontece.</p>
-      </aside>
+      <div class="intro-bottom"><a href="#manifesto">Do problema ao produto <span aria-hidden="true">↓</span></a><span class="micro">Scroll para explorar</span></div>
     </section>
 
-    <section class="content-section" aria-labelledby="featured-title">
-      <div class="section-heading section-heading--split">
-        <h2 id="featured-title">Projetos em destaque</h2>
-        <p>Três linhas de trabalho que mostram como observo um fluxo, construo uma solução e evoluo o que já funciona.</p>
+    <section class="manifesto scene" id="manifesto" aria-labelledby="manifesto-title">
+      <div class="scene-meta"><h2 id="manifesto-title">O ponto de partida</h2><span>Intenção antes da ferramenta</span></div>
+      <div class="manifesto-stage">
+        <p class="manifesto-beat">Não começo<br>pela tecnologia.</p>
+        <p class="manifesto-beat">Começo<br>pelo problema.</p>
+        <p class="manifesto-beat">Então construo.<br>Com propósito.</p>
+        <p class="manifesto-beat">Automatizo.<br>Valido. Evoluo.</p>
       </div>
-      <div class="featured-grid" id="featured-projects"></div>
+      <div class="manifesto-foot"><span class="manifesto-rule" aria-hidden="true"></span><p>Do script ao produto. Extensões, Apps Script, ferramentas web e aplicações desktop nascem do mesmo princípio: resolver o trabalho que realmente acontece.</p></div>
     </section>
 
-    <section class="content-section" aria-labelledby="principles-title">
-      <div class="section-heading"><h2 id="principles-title">Como construo</h2></div>
-      <div class="principles-grid">
-        <article class="principle"><h3>Começa no trabalho real</h3><p>O problema vem antes da tecnologia. Primeiro observo onde há repetição, demora ou margem para erro.</p></article>
-        <article class="principle"><h3>Automação com travas</h3><p>Ações sensíveis não desaparecem numa caixa-preta. Validação e aprovação humana fazem parte do produto.</p></article>
-        <article class="principle"><h3>Evolução documentada</h3><p>Versões, decisões e próximos passos ficam visíveis para que cada melhoria tenha contexto.</p></article>
+    <section class="work scene" id="work" aria-labelledby="featured-title">
+      <div class="work-stage">
+        <div class="scene-meta"><h2 id="featured-title">Projetos em destaque</h2><a class="quiet-link" href="/hub/projects/">Arquivo completo <span aria-hidden="true">↗</span></a></div>
+        <p class="work-intro">Observar um fluxo. Construir uma solução. Evoluir o que funciona.</p>
+        <div id="featured-projects" class="project-story" data-project-story><!-- featured:start -->
+<article class="project-panel" aria-labelledby="featured-command-assistant"><div class="project-copy"><div class="project-meta"><span class="project-number">01 / 03</span><span class="project-status">Desktop / Em desenvolvimento</span></div><h3 id="featured-command-assistant">Operations Command Assistant</h3><p class="project-lede">Um ambiente Electron que reúne automações antes espalhadas por extensões e páginas.</p><ul class="project-tech" aria-label="Tecnologias"><li>Electron</li><li>JavaScript</li><li>Python</li><li>CDP</li></ul><a class="inline-link" href="/hub/projects/#command-assistant" aria-label="Explorar o case Operations Command Assistant">Explorar o case<span aria-hidden="true">↗</span></a></div><div class="project-visual"><p>Evolução do projeto</p><ol><li data-state="done"><strong>Base desktop</strong><small>Concluído — Electron integrado a um sidecar Python.</small></li><li data-state="done"><strong>Sessões persistentes</strong><small>Concluído — Navegação interna e autenticação preservada.</small></li><li data-state="done"><strong>Módulos operacionais</strong><small>Concluído — Fluxos de captura, consulta e preenchimento reunidos.</small></li><li data-state="current"><strong>Arquitetura modular</strong><small>Em andamento — Consolidar integrações e reduzir dependências entre fluxos.</small></li></ol></div></article>
+<article class="project-panel" aria-labelledby="featured-workflow-suite"><div class="project-copy"><div class="project-meta"><span class="project-number">02 / 03</span><span class="project-status">Automação / Estável · em migração</span></div><h3 id="featured-workflow-suite">Operations Workflow Suite</h3><p class="project-lede">Uma família de extensões que conecta contexto, formulários e tarefas repetitivas.</p><ul class="project-tech" aria-label="Tecnologias"><li>Chrome MV3</li><li>JavaScript</li><li>DOM</li><li>Web APIs</li></ul><a class="inline-link" href="/hub/projects/#workflow-suite" aria-label="Explorar o case Operations Workflow Suite">Explorar o case<span aria-hidden="true">↗</span></a></div><div class="project-visual"><p>Evolução do projeto</p><ol><li data-state="done"><strong>Autofill inicial</strong><small>Concluído — Redução de digitação repetitiva.</small></li><li data-state="done"><strong>Contexto compartilhado</strong><small>Concluído — Dados reaproveitados entre ferramentas.</small></li><li data-state="done"><strong>Validações</strong><small>Concluído — Proteções e revisão antes de concluir tarefas.</small></li><li data-state="current"><strong>Migração para Electron</strong><small>Em andamento — Mover módulos sem interromper os fluxos estáveis.</small></li></ol></div></article>
+<article class="project-panel" aria-labelledby="featured-site-extractor"><div class="project-copy"><div class="project-meta"><span class="project-number">03 / 03</span><span class="project-status">Ferramenta / Funcional</span></div><h3 id="featured-site-extractor">Barreto Site Extractor</h3><p class="project-lede">Captura passiva de conteúdo público para migrações e redesigns rastreáveis.</p><ul class="project-tech" aria-label="Tecnologias"><li>Node.js</li><li>Playwright</li><li>WordPress API</li><li>PowerShell</li></ul><a class="inline-link" href="/hub/projects/#site-extractor" aria-label="Explorar o case Barreto Site Extractor">Explorar o case<span aria-hidden="true">↗</span></a></div><div class="project-visual"><p>Evolução do projeto</p><ol><li data-state="done"><strong>Crawler seguro</strong><small>Concluído — Captura sequencial com respeito a limites.</small></li><li data-state="done"><strong>Exportação estruturada</strong><small>Concluído — HTML, Markdown, assets e metadados.</small></li><li data-state="done"><strong>Inventário de migração</strong><small>Concluído — Cobertura e redirects rastreáveis.</small></li><li data-state="planned"><strong>Interface de configuração</strong><small>Planejado — Preparar capturas sem editar comandos.</small></li></ol></div></article>
+<!-- featured:end --></div>
+        <div class="work-controls" hidden><div class="project-tabs" role="group" aria-label="Escolher projeto em destaque"></div><span class="micro">Continue a explorar <span aria-hidden="true">↓</span></span></div>
       </div>
     </section>
 
-    <section class="content-section now-grid" aria-label="Trabalho atual e contacto">
-      <article class="now-panel">
-        <h2>Agora</h2>
-        <p id="now-note">Consolidando automações maduras em um produto desktop mais leve e sustentável.</p>
-        <p><strong id="now-building">Operations Command Assistant</strong></p>
-        <a class="case-card__link" href="/hub/now/">Ver o foco atual</a>
-      </article>
-      <article class="now-panel">
-        <h2>Tem um fluxo repetitivo?</h2>
-        <p>Posso ajudar a transformar passos manuais numa ferramenta clara, segura e sustentável.</p>
-        <a class="case-card__link" href="/hub/contact/">Entrar em contacto</a>
-      </article>
+    <section class="process scene" id="process" aria-labelledby="principles-title">
+      <div class="process-heading"><p class="micro">Do contexto à entrega</p><h2 id="principles-title">Como<br>construo.</h2><p>Uma ferramenta só faz sentido quando melhora o trabalho de alguém.</p></div>
+      <ol class="process-list">
+        <li><span class="process-number">01</span><div><p class="micro">Observe</p><h3>Começa no trabalho real.</h3><p>O problema vem antes da tecnologia. Primeiro observo onde há repetição, demora ou margem para erro.</p></div><span class="process-fill" aria-hidden="true"></span></li>
+        <li><span class="process-number">02</span><div><p class="micro">Build</p><h3>Construir o essencial.</h3><p>Do script à aplicação, escolho a tecnologia que melhor se encaixa no problema. A interface torna o fluxo claro.</p></div><span class="process-fill" aria-hidden="true"></span></li>
+        <li><span class="process-number">03</span><div><p class="micro">Validate</p><h3>Automação com travas.</h3><p>Ações sensíveis não desaparecem numa caixa-preta. Validação e aprovação humana fazem parte do produto.</p></div><span class="process-fill" aria-hidden="true"></span></li>
+        <li><span class="process-number">04</span><div><p class="micro">Evolve</p><h3>Evolução documentada.</h3><p>Versões, decisões e próximos passos ficam visíveis para que cada melhoria tenha contexto.</p></div></li>
+      </ol>
     </section>
+
+    <section class="current scene" id="current" aria-labelledby="current-title">
+      <div class="scene-meta"><h2 id="current-title">Agora / em construção</h2><span class="active-state">Ativo</span></div>
+      <div class="current-grid"><div><p class="micro">Building</p><h3 id="now-building">Operations Command Assistant</h3><p id="now-note">Consolidando automações maduras em um produto desktop mais leve e sustentável.</p><a class="inline-link" href="/hub/now/">Ver o foco atual <span aria-hidden="true">↗</span></a></div><dl><div><dt>Localização</dt><dd>Portugal</dd></div><div><dt>Foco</dt><dd>Automação<br>Ferramentas internas<br>Sistemas</dd></div><div><dt>Atualizado</dt><dd><time datetime="2026-09" id="now-updated">Setembro 2026</time></dd></div></dl></div>
+    </section>
+
+    <section class="closing scene" aria-labelledby="contact-title"><span class="closing-line" aria-hidden="true"></span><p class="micro">A próxima melhoria começa numa conversa</p><h2 id="contact-title">Tem um processo<br>que não deveria<br>ser manual?</h2><p>Posso ajudar a transformar passos manuais numa ferramenta clara, segura e sustentável.</p><a class="closing-link" href="/hub/contact/">Vamos construir. <span aria-hidden="true">↗</span></a></section>
   </main>
 
   <footer class="portfolio-footer">
     <p>João Barreto · <span data-current-year></span></p>
-    <a href="/hub/projects/">Ver todos os projetos</a>
+    <a id="github-link" href="https://github.com/Barretomen" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="/hub/projects/">Ver todos os projetos</a><a href="#main-content">Voltar ao início ↑</a>
   </footer>
   <script src="./config.js"></script>
   <script src="./app.js" defer></script>
+  <script src="./vendor/gsap.min.js" defer></script>
+  <script src="./vendor/ScrollTrigger.min.js" defer></script>
+  <script src="./vendor/lenis.min.js" defer></script>
+  <script src="./motion.js" defer></script>
 </body>
 </html>
